@@ -1,5 +1,11 @@
 Batch Clipboard Changelog
 
+## version 1.0.1b9 (2025-03-12)
+
+- Added potential hotkey in the Setting window to start a batch, can use this to start and then copy or cut in your frontmost app as normal.
+- Edited the github readme to include instructions to build from source.
+- Updated application copyright text for the year 2025.  
+
 ## version 1.0.1b8 (2025-01-11 🏈🚀)
 
 - Had to increase version number from 1.0 to 1.0.1 because reasons to do with the App Store, made it apply to non-AppStore build as well.
