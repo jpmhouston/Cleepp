@@ -131,6 +131,7 @@ jobs:
             echo "::error::Unable to extract bundle id from the xcode project"
             exit 1
           fi
+          echo "- $version $bundleid"
           
           if [[ -z "${{ inputs.releaseVersion }}" || $version == "${{ inputs.releaseVersion }}" ]] ; then
             echo "- Build version is $version"
@@ -150,20 +151,20 @@ jobs:
             if git show-ref --tags --verify refs/tags/v$version --quiet ; then
               tag="v$version"
               if [[ ${{ steps.inputs.outputs.githubRelease }} != 'true' ]] ; then
-                echo "- Will build and save release \"${{ steps.version.outputs.releasename }}\" as artifact"
+                echo "- Will build and save release \"$releasename\" as artifact"
               else
-                echo "- Will build and draft release \"${{ steps.version.outputs.releasename }}\" with matching tag \"$tag\""
+                echo "- Will build and draft release \"$releasename\" with matching tag \"$tag\""
               fi
             elif [[ ${{ steps.inputs.outputs.githubRelease }} != 'true' ]] ; then
-              echo "- Will build and save release \"${{ steps.version.outputs.releasename }}\" as artifact"
+              echo "- Will build and save release \"$releasename\" as artifact"
             else
-              echo "- Will build and save release \"${{ steps.version.outputs.releasename }}\" as artifact because no tag \"v$version\" was found"
+              echo "- Will build and save release \"$releasename\" as artifact because no tag \"v$version\" was found"
             fi
           elif [[ "${{ github.ref }}" == refs/tags/* ]] ; then
             # TODO: how do we verify the branch of this tag and ensure its ${{ env.branch }} ?
             ref="${{ github.ref }}"
             tag="${ref:10}" # magic number 10 being the length of "refs/tags/", stripping that to leave just the tag name
-            echo "- Will build and draft release \"${{ steps.version.outputs.releasename }}\" because triggered by pushed tag \"$tag\""
+            echo "- Will build and draft release \"$releasename\" because triggered by pushed tag \"$tag\""
           else
             echo "::error::Not triggered manually or by a tag (github.event_name == ${{ github.event_name }}, gihub.ref == ${{ github.ref }})"
             exit 1

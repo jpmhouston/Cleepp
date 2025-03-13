@@ -119,6 +119,7 @@ jobs:
             echo "::error::Unable to extract bundle id from the xcode project"
             exit 1
           fi
+          echo "- $version $bundleid"
           
           if [[ -z "${{ inputs.releaseVersion }}" || $version == "${{ inputs.releaseVersion }}" ]] ; then
             echo "- Build version is $version"
@@ -136,9 +137,9 @@ jobs:
               exit 1
             fi
             if [[ ${{ steps.inputs.outputs.upload }} == 'true' ]] ; then
-              echo "- Will build and save as artifacts verison \"${{ steps.version.outputs.releasename }}\" and associated release notes"
+              echo "- Will build and save as artifacts verison \"$releasename\" and associated release notes"
             else
-              echo "- Will build and deplay verison \"${{ steps.version.outputs.releasename }}\" and save as as artifact with associated release notes"
+              echo "- Will build and deplay verison \"$releasename\" and save as as artifact with associated release notes"
             fi
           else
             echo "::error::Not triggered manually or by a tag (github.event_name == ${{ github.event_name }}, gihub.ref == ${{ github.ref }})"
