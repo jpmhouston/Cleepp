@@ -6,6 +6,24 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>1.0.1b9</title>
+            <pubDate>Thu, 13 Mar 2025 06:38:19 +0000</pubDate>
+            <link>https://github.com/jpmhouston/Cleepp/releases</link>
+            <sparkle:version>911</sparkle:version>
+            <sparkle:shortVersionString>1.0.1b9</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>11.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<ul>
+<li>Added potential hotkey in the Setting window to start a batch, can
+use this to start and then copy or cut in your frontmost app as
+normal to collect to the batch.</li>
+<li>Edited the github readme to include instructions to build from
+source.</li>
+<li>Updated application copyright text for the year 2025.</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/jpmhouston/Cleepp/releases/download/v1.0.1b9/Batch.Clipboard.1.0.1b9.zip" length="6182056" type="application/octet-stream" sparkle:edSignature="QJJs+mhAnHhcmkJnnPpg3pdPYtChGdiqmU1V1r5AkahMjvgLDbzi6PCUCmHrNztA5UiNzWj377PGZ7Iq7JYdAA=="/>
+        </item>
+        <item>
             <title>1.0.1b8</title>
             <pubDate>Sat, 11 Jan 2025 16:52:26 +0000</pubDate>
             <link>https://github.com/jpmhouston/Cleepp/releases</link>
@@ -41,36 +59,6 @@ SwiftyStoreKit fully removed.</li>
 </ul>
 ]]></description>
             <enclosure url="https://github.com/jpmhouston/Cleepp/releases/download/v1.0b6/Batch.Clipboard.1.0b6.zip" length="6238205" type="application/octet-stream" sparkle:edSignature="x+YqmSu0qotrlpthG65L9P0j6Mi4oMwxAKi3nfGYjQveoAzbiTfHSD7VWd2CxufvgL+UO9ZIWfDOyyOm7aDnDA=="/>
-        </item>
-        <item>
-            <title>1.0b5</title>
-            <pubDate>Sun, 17 Nov 2024 14:44:28 +0000</pubDate>
-            <link>https://github.com/jpmhouston/Cleepp/releases</link>
-            <sparkle:version>882</sparkle:version>
-            <sparkle:shortVersionString>1.0b5</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>11.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<ul>
-<li>App Store build should now successfully fetch products from Apple
-servers and support making purchases.</li>
-<li>App Store build product details now displays the product titles not
-the descriptions.</li>
-<li>Only allow debug App Store builds to detect option key held when
-starting purchase and show dummy product details, “buy” without
-purchasing.</li>
-<li>Longer timeouts for some App Store transactions, to account for
-potential sign in dialogs, before spinner stops and “delayed” message
-shown.</li>
-<li>Improve wording of some delayed App Store transaction messages,
-message shown when cancelling purchase.</li>
-<li>Simplify copyright string in Info plist, omit Maccy author (still
-fully acknowledged in the credits file/window).</li>
-<li>App Store build get version number suffixes stripped (1.0b5 -&gt;
-1.0) to appease App Store Connect.</li>
-<li>App Store and non-App Store builds no longer lose entitlements in
-the GitHub build workflow resigning steps.</li>
-</ul>
-]]></description>
-            <enclosure url="https://github.com/jpmhouston/Cleepp/releases/download/v1.0b5/Batch.Clipboard.1.0b5.zip" length="6235754" type="application/octet-stream" sparkle:edSignature="Rc6ChEEyybgLxTodMMfVtKcZWQ1ktyb7CBirQOZ0kFnlKCgveMDiDwVKZYmuzG+r6N4QvIrWFFbQms6bjnP4CQ=="/>
         </item>
         <item>
             <title>1.0b1</title>
