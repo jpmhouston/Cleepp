@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet weak var pasteMenuItem: NSMenuItem!
 
 #if CLEEPP
+  private var startHotKey: GlobalStartHotKey!
   private var copyHotKey: GlobalCopyHotKey!
   private var pasteHotKey: GlobalPasteHotKey!
   #else
@@ -44,6 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     maccy = Maccy()
     #if CLEEPP
+    startHotKey = GlobalStartHotKey(maccy.startQueueMode)
     copyHotKey = GlobalCopyHotKey(maccy.queuedCopy)
     pasteHotKey = GlobalPasteHotKey(maccy.queuedPaste)
     #else

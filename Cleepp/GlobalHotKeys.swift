@@ -13,6 +13,25 @@ import AppKit
 import KeyboardShortcuts
 import Sauce
 
+class GlobalStartHotKey {
+  typealias Handler = () -> Void
+
+  static public var key: Key? {
+    guard let key = KeyboardShortcuts.Shortcut(name: .queueStart)?.key else {
+      return nil
+    }
+    return Sauce.shared.key(for: key.rawValue)
+  }
+  static public var modifierFlags: NSEvent.ModifierFlags? { KeyboardShortcuts.Shortcut(name: .queueStart)?.modifiers }
+
+  private var handler: Handler
+
+  init(_ handler: @escaping Handler) {
+    self.handler = handler
+    KeyboardShortcuts.onKeyDown(for: .queueStart, action: handler)
+  }
+}
+
 class GlobalCopyHotKey {
   typealias Handler = () -> Void
 

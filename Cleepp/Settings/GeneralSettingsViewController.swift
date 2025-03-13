@@ -15,6 +15,7 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
 
   override var nibName: NSNib.Name? { "GeneralSettingsViewController" }
 
+  private let startHotkeyRecorder = KeyboardShortcuts.RecorderCocoa(for: .queueStart)
   private let copyHotkeyRecorder = KeyboardShortcuts.RecorderCocoa(for: .queuedCopy)
   private let pasteHotkeyRecorder = KeyboardShortcuts.RecorderCocoa(for: .queuedPaste)
 
@@ -26,6 +27,7 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
     string: "x-apple.systempreferences:com.apple.LoginItems-Settings.extension"
   )
   
+  @IBOutlet weak var startHotkeyContainerView: NSView!
   @IBOutlet weak var copyHotkeyContainerView: NSView!
   @IBOutlet weak var pasteHotkeyContainerView: NSView!
   @IBOutlet weak var launchAtLoginButton: NSButton!
@@ -56,6 +58,7 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    startHotkeyContainerView.addSubview(startHotkeyRecorder)
     copyHotkeyContainerView.addSubview(copyHotkeyRecorder)
     pasteHotkeyContainerView.addSubview(pasteHotkeyRecorder)
     

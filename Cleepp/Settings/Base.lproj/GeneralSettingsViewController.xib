@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,6 +19,7 @@
                 <outlet property="searchModeButton" destination="W4h-tN-MTS" id="pfI-eV-8QZ"/>
                 <outlet property="searchModeLabel" destination="Q7N-u9-cfJ" id="Qpp-jn-C9c"/>
                 <outlet property="searchModeSeparator" destination="fMY-lL-A9Q" id="LyO-9W-ahU"/>
+                <outlet property="startHotkeyContainerView" destination="wkA-3I-kqY" id="kTs-tU-jLB"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -35,6 +36,7 @@
                         <gridRow id="Ssu-ST-LDz"/>
                         <gridRow id="bpM-Oe-CBP"/>
                         <gridRow id="mzz-6k-Dz9"/>
+                        <gridRow id="tKf-uu-raQ"/>
                         <gridRow yPlacement="top" rowAlignment="lastBaseline" id="1lh-Qw-cAx"/>
                         <gridRow rowAlignment="lastBaseline" id="rSH-D5-fQU"/>
                         <gridRow id="gQG-qR-qof"/>
@@ -61,7 +63,7 @@
                         <gridCell row="E4T-ss-Za5" column="vOJ-9h-G8Y" id="VPs-T2-TJo"/>
                         <gridCell row="E4T-ss-Za5" column="pQU-Pz-q1v" id="ZAg-Pc-caU">
                             <stackView key="contentView" distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N6u-W6-DOj">
-                                <rect key="frame" x="132" y="178" width="300" height="90"/>
+                                <rect key="frame" x="132" y="282" width="300" height="90"/>
                                 <subviews>
                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GaN-gj-k5w">
                                         <rect key="frame" x="-2" y="34" width="304" height="56"/>
@@ -104,7 +106,7 @@
                         <gridCell row="Ssu-ST-LDz" column="vOJ-9h-G8Y" id="gUk-1z-sYH"/>
                         <gridCell row="Ssu-ST-LDz" column="pQU-Pz-q1v" id="qhX-wf-DeN">
                             <button key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mxc-Pf-Ef9">
-                                <rect key="frame" x="130" y="153" width="222" height="18"/>
+                                <rect key="frame" x="130" y="257" width="222" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check for updates automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="avb-QJ-T0h">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -117,7 +119,7 @@
                         <gridCell row="bpM-Oe-CBP" column="vOJ-9h-G8Y" id="F1h-En-eCd"/>
                         <gridCell row="bpM-Oe-CBP" column="pQU-Pz-q1v" id="4MC-s5-NJN">
                             <button key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ik8-mb-VoG">
-                                <rect key="frame" x="132" y="127" width="77" height="19"/>
+                                <rect key="frame" x="132" y="168" width="77" height="19"/>
                                 <buttonCell key="cell" type="roundRect" title="Check now" bezelStyle="roundedRect" alignment="center" borderStyle="border" inset="2" id="8Rb-OS-d59">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -129,17 +131,40 @@
                         </gridCell>
                         <gridCell row="mzz-6k-Dz9" column="vOJ-9h-G8Y" headOfMergedCell="hec-ch-tJx" yPlacement="center" id="hec-ch-tJx">
                             <box key="contentView" verticalHuggingPriority="700" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Mfq-pZ-sSn">
-                                <rect key="frame" x="332" y="117" width="100" height="5"/>
+                                <rect key="frame" x="332" y="158" width="100" height="5"/>
                             </box>
                         </gridCell>
                         <gridCell row="mzz-6k-Dz9" column="pQU-Pz-q1v" headOfMergedCell="hec-ch-tJx" id="hE2-yX-ng0"/>
+                        <gridCell row="tKf-uu-raQ" column="vOJ-9h-G8Y" id="gaG-xV-jaJ">
+                            <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1Q-kI-egx">
+                                <rect key="frame" x="45" y="119" width="76" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="ccs-88-5v0"/>
+                                </constraints>
+                                <textFieldCell key="cell" alignment="right" title="Start Batch:" id="PZa-sP-B3m">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </gridCell>
+                        <gridCell row="tKf-uu-raQ" column="pQU-Pz-q1v" id="JTS-jd-trE">
+                            <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wkA-3I-kqY">
+                                <rect key="frame" x="132" y="122" width="100" height="30"/>
+                                <string key="toolTip">Global shortcut key to start a new clipboard item batch.
+Default: none.</string>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="j2p-Ny-ogZ"/>
+                                </constraints>
+                            </customView>
+                        </gridCell>
                         <gridCell row="1lh-Qw-cAx" column="vOJ-9h-G8Y" id="2m8-9a-mJO">
                             <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C8J-Mx-Lzz">
-                                <rect key="frame" x="30" y="78" width="91" height="23"/>
+                                <rect key="frame" x="43" y="78" width="78" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="10R-0q-RDn"/>
                                 </constraints>
-                                <textFieldCell key="cell" alignment="right" title="Queued Copy:" id="hdM-75-pvO">
+                                <textFieldCell key="cell" alignment="right" title="Batch Copy:" id="hdM-75-pvO">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -149,7 +174,7 @@
                         <gridCell row="1lh-Qw-cAx" column="pQU-Pz-q1v" id="t3H-4Z-90w">
                             <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gv6-rV-zkI">
                                 <rect key="frame" x="132" y="81" width="100" height="30"/>
-                                <string key="toolTip">Global shortcut key to copy into the queue.
+                                <string key="toolTip">Global shortcut key to copy into the batch queue, starting new batch if one not yet started.
 Default: ^⌘C.</string>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Ntm-y4-aXK"/>
@@ -158,11 +183,11 @@ Default: ^⌘C.</string>
                         </gridCell>
                         <gridCell row="rSH-D5-fQU" column="vOJ-9h-G8Y" id="MkQ-Ti-RAy">
                             <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UNS-12-xWP">
-                                <rect key="frame" x="28" y="37" width="93" height="23"/>
+                                <rect key="frame" x="41" y="37" width="80" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="ARz-S4-0pY"/>
                                 </constraints>
-                                <textFieldCell key="cell" alignment="right" title="Queued Paste:" id="1Tw-Z5-00F">
+                                <textFieldCell key="cell" alignment="right" title="Batch Paste:" id="1Tw-Z5-00F">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -172,7 +197,7 @@ Default: ^⌘C.</string>
                         <gridCell row="rSH-D5-fQU" column="pQU-Pz-q1v" id="yVM-gZ-e0i">
                             <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pPs-rF-k8m">
                                 <rect key="frame" x="132" y="40" width="100" height="30"/>
-                                <string key="toolTip">Global shortcut key to paste next item from the queue.
+                                <string key="toolTip">Global shortcut key to paste next item from the batch queue.
 Default: ^⌘P.</string>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Nux-kj-G8Q"/>

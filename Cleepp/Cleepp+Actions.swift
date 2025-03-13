@@ -53,16 +53,24 @@ extension Cleepp {
   
   @IBAction
   func startQueueMode(_ sender: AnyObject) {
+    // convenience handler for the menu item
     menu.cancelTrackingWithoutAnimation() // do this before any alerts appear
+    startQueueMode(interactive: true)
+  }
+  
+  func startQueueMode() {
+    // convenience handler for the global keyboard shortcut
     startQueueMode(interactive: true)
   }
   
   @discardableResult
   func startQueueMode(interactive: Bool = false) -> Bool {
+    // handler for the global keyboard shortcut and menu item via convenience functions above,
+    // and for the intent which calls this directly
     guard !Self.busy else {
       return false
     }
-    guard accessibilityCheck() else {
+    guard accessibilityCheck(interactive: interactive) else {
       return false
     }
     guard !queue.isOn else {
@@ -105,19 +113,20 @@ extension Cleepp {
   
   @IBAction
   func queuedCopy(_ sender: AnyObject) {
-    // handler for the menu item
+    // convenience handler for the menu item
     menu.cancelTrackingWithoutAnimation() // do this before any alerts appear
     queuedCopy(interactive: true)
   }
   
   func queuedCopy() {
-    // handler for the global keyboard shortcut
+    // convenience handler for the global keyboard shortcut
     queuedCopy(interactive: true)
   }
   
   @discardableResult
   func queuedCopy(interactive: Bool) -> Bool {
-    // handler for the global keyboard shortcut and menu item via funcs above, and the intent
+    // handler for the global keyboard shortcut and menu item via convenience functions above,
+    // and for the intent which calls this directly
     guard !Self.busy else {
       return false
     }
@@ -180,19 +189,20 @@ extension Cleepp {
   
   @IBAction
   func queuedPaste(_ sender: AnyObject) {
-    // handler for the global keyboard shortcut
+    // convenience handler for the menu item
     menu.cancelTrackingWithoutAnimation() // do this before any alerts appear
     queuedPaste(interactive: true)
   }
   
   func queuedPaste() {
-    // handler for the global keyboard shortcut
+    // convenience handler for the global keyboard shortcut
     queuedPaste(interactive: true)
   }
   
   @discardableResult
   func queuedPaste(interactive: Bool) -> Bool {
-    // handler for the global keyboard shortcut and menu item via funcs above, and the intent
+    // handler for the global keyboard shortcut and menu item via convenience functions above,
+    // and for the intent which calls this directly
     guard !Self.busy else {
       return false
     }

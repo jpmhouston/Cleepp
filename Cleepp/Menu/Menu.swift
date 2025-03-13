@@ -543,6 +543,7 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
   }
   
   private func updateShortcuts() {
+    queueStartItem?.setShortcut(for: .queueStart)
     queuedCopyItem?.setShortcut(for: .queuedCopy)
     queuedPasteItem?.setShortcut(for: .queuedPaste)
     // might have a start stop hotkey at some point, something like:
