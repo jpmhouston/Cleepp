@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -53,40 +53,46 @@
                     </connections>
                 </menuItem>
                 <menuItem title="Show Intro..." alternate="YES" id="1Eb-11-wVB">
-                    <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES"/>
+                    <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                     <connections>
                         <action selector="showIntro:" target="-2" id="uTE-rv-v5K"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Start Collecting" tag="101" id="Y5o-n6-NCS">
+                <menuItem title="Start Batch" tag="101" id="Y5o-n6-NCS">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="startQueueMode:" target="-2" id="MbC-Ui-kST"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Cancel Collecting / Replaying" tag="102" hidden="YES" id="TKZ-UP-Ggw">
+                <menuItem title="Cancel Batch" tag="102" hidden="YES" id="TKZ-UP-Ggw">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="cancelQueueMode:" target="-2" id="sql-E4-fEM"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Advance Replay to Next Item" hidden="YES" id="TLY-ku-V0E">
-                    <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                <menuItem title="Start Replaying Items" hidden="YES" id="xpH-S9-QDS">
+                    <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                     <connections>
-                        <action selector="advanceReplay:" target="-2" id="Bb4-sn-Nnk"/>
+                        <action selector="startReplay:" target="-2" id="meN-9w-5Wi"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="1dD-HH-ufE"/>
-                <menuItem title="Copy &amp; Collect" tag="103" id="ieX-in-c9O">
+                <menuItem title="Copy To Batch" tag="103" id="ieX-in-c9O">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="queuedCopy:" target="-2" id="VYn-hd-kO6"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Paste &amp; Advance" tag="104" id="WZ5-r7-f8t">
+                <menuItem title="Paste From Batch &amp; Advance" tag="104" id="WZ5-r7-f8t">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="queuedPaste:" target="-2" id="Dd4-CN-zGU"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Advance to Next Batch Item" hidden="YES" id="TLY-ku-V0E">
+                    <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                    <connections>
+                        <action selector="advanceReplay:" target="-2" id="Bb4-sn-Nnk"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Paste All" id="mK7-my-GpM">
@@ -169,7 +175,6 @@ CA
                 </menuItem>
             </items>
             <connections>
-                <outlet property="advanceItem" destination="TLY-ku-V0E" id="od9-PM-WWa"/>
                 <outlet property="clearItem" destination="u3d-qz-ihN" id="aak-jk-gan"/>
                 <outlet property="deleteItem" destination="vGj-r1-rIx" id="wrK-G3-cEq"/>
                 <outlet property="historyHeaderItem" destination="MMa-qd-9PO" id="Isx-BV-gjX"/>
@@ -177,6 +182,8 @@ CA
                 <outlet property="prototypeAnchorItem" destination="pms-CA-OfJ" id="SCX-Hb-a2C"/>
                 <outlet property="prototypeCopyItem" destination="1hg-yO-AD0" id="BFx-GW-cTS"/>
                 <outlet property="prototypeReplayItem" destination="u5y-6g-IID" id="BiY-9N-axa"/>
+                <outlet property="queueAdvanceItem" destination="TLY-ku-V0E" id="od9-PM-WWa"/>
+                <outlet property="queueReplayItem" destination="xpH-S9-QDS" id="SV5-iZ-vcs"/>
                 <outlet property="queueStartItem" destination="Y5o-n6-NCS" id="j9S-hc-MQx"/>
                 <outlet property="queueStopItem" destination="TKZ-UP-Ggw" id="2PD-gl-875"/>
                 <outlet property="queuedCopyItem" destination="ieX-in-c9O" id="V9f-FJ-h9b"/>

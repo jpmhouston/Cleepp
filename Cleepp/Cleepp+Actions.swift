@@ -112,6 +112,15 @@ extension Cleepp {
   }
   
   @IBAction
+  func startReplay(_ sender: AnyObject) {
+    do {
+      try queue.replaying()
+    } catch {
+      return
+    }
+  }
+  
+  @IBAction
   func queuedCopy(_ sender: AnyObject) {
     // convenience handler for the menu item
     menu.cancelTrackingWithoutAnimation() // do this before any alerts appear
@@ -137,7 +146,7 @@ extension Cleepp {
     restoreClipboardMonitoring()
     
     if !queue.isOn {
-      queue.on(allowStayingOnAfterDecrementToZero: false)
+      queue.on()
     }
     
     Self.busy = true
@@ -207,7 +216,7 @@ extension Cleepp {
       return false
     }
     
-    guard !queue.empty else {
+    guard !queue.isEmpty else {
       return false
     }
     guard accessibilityCheck(interactive: interactive) else {
@@ -217,7 +226,7 @@ extension Cleepp {
     Self.busy = true
     
     do {
-      try queue.putNextOnClipboard()
+      try queue.replaying()
     } catch {
       Self.busy = false
       return false
@@ -267,7 +276,7 @@ extension Cleepp {
       return
     }
     
-    guard !queue.empty else {
+    guard !queue.isEmpty else {
       return
     }
     guard accessibilityCheck() else {
@@ -300,7 +309,7 @@ extension Cleepp {
       return
     }
     
-    guard !queue.empty else {
+    guard !queue.isEmpty else {
       return
     }
     guard accessibilityCheck() else {
@@ -375,7 +384,7 @@ extension Cleepp {
         completion()
         return
       }
-      if queue.empty || count <= 1 {
+      if queue.isEmpty || count <= 1 {
         completion()
         return
       }
@@ -393,7 +402,7 @@ extension Cleepp {
       return
     }
     
-    guard !queue.empty else {
+    guard !queue.isEmpty else {
       return
     }
     
@@ -430,7 +439,7 @@ extension Cleepp {
       return false
     }
     
-    queue.on(allowStayingOnAfterDecrementToZero: false)
+    queue.on()
     do {
       try queue.setHead(toIndex: index)
     } catch {
@@ -533,7 +542,7 @@ extension Cleepp {
     history.remove(removeItem)
     menu.delete(position: 0)
     
-    if !queue.empty {
+    if !queue.isEmpty {
       fixQueueAfterDeletingItem(atIndex: 0)
     }
   }

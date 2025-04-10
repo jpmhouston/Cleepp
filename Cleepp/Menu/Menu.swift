@@ -77,6 +77,8 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     // to skip using separator when using the badge on >=sonoma. still deciding
     //if #unavailable(macOS 14) { true } else { false }
   }
+  private var promoteExtrasBadge: NSObject?
+  private var cacheUndoCopyItemShortcut = ""
   private var showsExpandedMenu = false
   private var showsFullExpansion = false
   private var isFiltered = false
@@ -95,9 +97,10 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
   
   @IBOutlet weak var queueStartItem: NSMenuItem?
   @IBOutlet weak var queueStopItem: NSMenuItem?
-  @IBOutlet weak var advanceItem: NSMenuItem?
+  @IBOutlet weak var queueReplayItem: NSMenuItem?
   @IBOutlet weak var queuedCopyItem: NSMenuItem?
   @IBOutlet weak var queuedPasteItem: NSMenuItem?
+  @IBOutlet weak var queueAdvanceItem: NSMenuItem?
   @IBOutlet weak var queuedPasteMultipleItem: NSMenuItem?
   @IBOutlet weak var queuedPasteAllItem: NSMenuItem?
   @IBOutlet weak var noteItem: NSMenuItem?
@@ -258,7 +261,7 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
       removeQueueItemsSeparator() // expected to already be removed! but ensure now that it really is
     }
     
-    if showsExpandedMenu && !isFiltered && !Cleepp.busy && !queue.empty &&
+    if showsExpandedMenu && !isFiltered && !Cleepp.busy && !queue.isEmpty &&
         indexedItems.count > queue.size
     {
       let followingItem = indexedItems[queue.size]
@@ -286,12 +289,13 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     let notBusy = !Cleepp.busy
     queueStartItem?.isEnabled = notBusy
     queueStopItem?.isEnabled = notBusy
-    advanceItem?.isEnabled = notBusy
+    queueReplayItem?.isEnabled = notBusy
     queuedCopyItem?.isEnabled = notBusy
+    queueAdvanceItem?.isEnabled = notBusy
     
-    queuedPasteItem?.isEnabled = notBusy && !queue.empty
-    queuedPasteMultipleItem?.isEnabled = notBusy && !queue.empty
-    queuedPasteAllItem?.isEnabled = notBusy && !queue.empty
+    queuedPasteItem?.isEnabled = notBusy && !queue.isEmpty
+    queuedPasteMultipleItem?.isEnabled = notBusy && !queue.isEmpty
+    queuedPasteAllItem?.isEnabled = notBusy && !queue.isEmpty
     
     clearItem?.isEnabled = notBusy
     undoCopyItem?.isEnabled = notBusy
@@ -728,15 +732,16 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     guard let historyHeaderItem = historyHeaderItem, let trailingSeparatorItem = trailingSeparatorItem else {
       return
     }
-    let gotHistoryItems = !queue.empty || (showsExpandedMenu && indexedItems.count > 0)
+    let gotHistoryItems = !queue.isEmpty || (showsExpandedMenu && indexedItems.count > 0)
     let showSearchHeader = showsExpandedMenu && Cleepp.allowHistorySearch && !UserDefaults.standard.hideSearch
     
     // Switch visibility of start vs stop menu item
     queueStartItem?.isVisible = !queue.isOn
     queueStopItem?.isVisible = queue.isOn
     
-    // Allow/prohibit alternate to queueStopItem
-    advanceItem?.isVisibleAlternate = !queue.empty
+    // Allow/prohibit alternate to queueStopItem & queuePasteItem
+    queueReplayItem?.isVisibleAlternate = !queue.isEmpty && !queue.isReplaying
+    queueAdvanceItem?.isVisibleAlternate = !queue.isEmpty
     
     // Bonus features to hide when not purchased
     queuedPasteAllItem?.isVisible = Cleepp.allowPasteMultiple
@@ -744,8 +749,8 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     undoCopyItem?.isVisible = Cleepp.allowUndoCopy
     
     // Delete item visibility
-    deleteItem?.isVisible = !queue.empty || showsExpandedMenu
-    clearItem?.isVisible = !queue.empty || showsExpandedMenu
+    deleteItem?.isVisible = !queue.isEmpty || showsExpandedMenu
+    clearItem?.isVisible = !queue.isEmpty || showsExpandedMenu
     
     // Visiblity of the history header and trailing separator
     // (the expanded menu means the search header and all of the history items)
@@ -769,7 +774,7 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     var remainingHistoryMenuItemIndex = firstHistoryMenuItemIndex
     
     // First queue items to always show when not filtering by a search term
-    if !queue.empty && !isFiltered {
+    if !queue.isEmpty && !isFiltered {
       let endQueuedItemIndex = remainingHistoryMenuItemIndex + historyMenuItemsGroupCount * queue.size
       
       for index in firstHistoryMenuItemIndex ..< endQueuedItemIndex {

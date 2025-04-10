@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -734,7 +734,7 @@ DQ
                                 </textField>
                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ofc-pm-ZHJ">
                                     <rect key="frame" x="-2" y="204" width="554" height="34"/>
-                                    <textFieldCell key="cell" title="You can enter _batch mode_ from the Start Collecting menu item, or by just control-clicking on the menu icon." id="Jnh-iX-NZD">
+                                    <textFieldCell key="cell" title="You can enter _batch mode_ from the Start Batch menu item, or by just control-clicking on the menu icon." id="Jnh-iX-NZD">
                                         <font key="font" metaFont="system" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -744,7 +744,7 @@ DQ
                                     <rect key="frame" x="-2" y="141" width="554" height="51"/>
                                     <textFieldCell key="cell" id="ejz-po-1sn">
                                         <font key="font" metaFont="system" size="14"/>
-                                        <string key="title">Using ^⌘C is a convenient way to enter that mode with the first copy, but afterwards items copied to the clipboard in any manner are all collected. You can use the frontmost application's Cut command instead for example.</string>
+                                        <string key="title">Using ^⌘C is a convenient way to enter batch mode with the first copy, but once in batch mode, items copied to the clipboard in any manner are all collected. You can use the frontmost application's Cut command instead for example.</string>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>

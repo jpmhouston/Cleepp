@@ -16,25 +16,12 @@ class ClipboardQueue {
     case sizeExceedsHistory
   }
   
-  enum Mode {
-    case pasteboardHasLatest
-    case pasteboardHasNext
-    
-    static var easy: Self { .pasteboardHasLatest }
-    static var pro: Self { .pasteboardHasNext }
-  }
-  
   var isOn = false
+  var isReplaying = false
   var stayOnWhenEmptied = false
   var size = 0 {
     didSet {
       history.maxItemsOverride = size
-    }
-  }
-  
-  var mode = Mode.easy {
-    didSet {
-      modeChanged()
     }
   }
   
@@ -53,26 +40,23 @@ class ClipboardQueue {
     isOn && size > 0
   }
   
-  var empty: Bool {
+  var isEmpty: Bool {
     !notEmpty
   }
   
   var headIndex: Int? {
-    if empty {
+    if isEmpty {
       nil
     } else {
       size - 1
     }
   }
   
-  func modeChanged() {
-    // ?
-  }
-  
   // MARK: -
   
-  func on(allowStayingOnAfterDecrementToZero allowEmpty: Bool = true) {
+  func on(allowStayingOnAfterDecrementToZero allowEmpty: Bool = false) {
     isOn = true
+    isReplaying = false
     stayOnWhenEmptied = allowEmpty
     size = 0
   }
@@ -82,8 +66,17 @@ class ClipboardQueue {
     size = 0
     
     // in case pasteboard was left set to an item deeper in the queue, reset to the latest item copied
-    if mode == .pasteboardHasNext, let newestItem = history.first {
+    if isReplaying, let newestItem = history.first {
       clipboard.copy(newestItem)
+    }
+    
+    isReplaying = false
+  }
+  
+  func replaying() throws {
+    if !isReplaying {
+      isReplaying = true
+      try putNextOnClipboard()
     }
   }
   
@@ -102,7 +95,7 @@ class ClipboardQueue {
     
     // we presume the item passed in has come from the clipboard,
     // if size of the queue is only 1, then we've already got the one we want for either mode
-    if mode == .pasteboardHasNext && size > 1 {
+    if isReplaying && size > 1 {
       guard let headIndex = headIndex else {
         throw QueueError.logicError
       }
@@ -110,18 +103,14 @@ class ClipboardQueue {
         throw QueueError.sizeExceedsHistory
       }
       
-      // in the mode where always want next item to be pasted on the clipboard, presuming the item
+      // in replaying mode where always want next item to be pasted on the clipboard, presuming the item
       // passed in has come from the clipboard, replace it again with the next item to be pasted
       clipboard.copy(history.all[headIndex])
     }
   }
   
   func putNextOnClipboard() throws {
-    if mode == .pasteboardHasNext {
-      return
-    }
-    
-    guard !empty, let headIndex = headIndex else {
+    guard !isEmpty, let headIndex = headIndex else {
       throw QueueError.noSuchItem
     }
     guard headIndex < history.count else {
@@ -132,7 +121,7 @@ class ClipboardQueue {
   }
   
   func remove(atIndex index: Int? = nil) throws {
-    guard !empty, let priorHeadIndex = headIndex else {
+    guard !isEmpty, let priorHeadIndex = headIndex else {
       throw QueueError.noSuchItem
     }
     let index = index ?? priorHeadIndex
@@ -142,17 +131,18 @@ class ClipboardQueue {
     
     size -= 1
     
-    if empty {
+    if isEmpty {
       isOn = stayOnWhenEmptied
       // leave clipboard alone, want it to be left at the latest item that's been copied, but even
-      // in pasteboardHasNext mode, when queue size was 1 the next to paste was the latest copied
+      // in replaying mode where next item on clipbboard not the last item copies, when queue size
+      // was 1 the next to paste was the latest copied
       
-    } else if mode == .pasteboardHasLatest && index == 0 {
+    } else if !isReplaying && index == 0 {
       // in the mode where always want the latest item that's been copied on the clipboard,
       // but latest item has been removed, use the new latest one in its place
       clipboard.copy(history.all.first)
       
-    } else if mode == .pasteboardHasNext && index == priorHeadIndex {
+    } else if isReplaying && index == priorHeadIndex {
       guard let newHeadIndex = headIndex else {
         throw QueueError.logicError // should have insted entered the `if empty` case above
       }
@@ -160,8 +150,8 @@ class ClipboardQueue {
         throw QueueError.sizeExceedsHistory
       }
       
-      // in the mode where always want next item to be pasted on the clipboard, but the next one
-      // has been removed, use the new next one in its place
+      // in replaying mode where always want next item to be pasted on the clipboard, but the
+      // next one has been removed, use the new next one in its place
       clipboard.copy(history.all[newHeadIndex])
     }
   }
@@ -173,7 +163,7 @@ class ClipboardQueue {
     
     size = index + 1
     
-    if mode == .pasteboardHasNext && size > 1 {
+    if isReplaying && size > 1 {
       guard index < history.count else {
         throw QueueError.sizeExceedsHistory
       }
@@ -186,13 +176,13 @@ class ClipboardQueue {
   // MARK: -
   
   func bulkRemoveNext() throws {
-    guard !empty else {
+    guard !isEmpty else {
       throw QueueError.noSuchItem
     }
     
     size -= 1
     
-    if empty {
+    if isEmpty {
       isOn = stayOnWhenEmptied
       // leave clipboard alone, want it to be left at the latest item copied which should
       // be the one from the previous iteration
@@ -208,7 +198,7 @@ class ClipboardQueue {
   
   func finishBulkRemove() {
     // if size of the queue is only 1, then we've already got the one we want for either mode
-    if mode == .pasteboardHasLatest && size > 1 {
+    if !isReplaying && size > 1 {
       // in the mode where always want the latest item that's been copied on the clipboard
       clipboard.copy(history.all.first)
     }

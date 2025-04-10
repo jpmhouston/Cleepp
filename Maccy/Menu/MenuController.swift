@@ -61,8 +61,7 @@ class MenuController {
         return
       }
       
-      if !modifierFlags.contains(.option) &&
-          (modifierFlags.contains(.control) || modifierFlags.contains(.shift)) {
+      if !modifierFlags.contains(.option) && modifierFlags.contains(.control) {
         menu.performQueueModeToggle()
         return
       }
