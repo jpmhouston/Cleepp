@@ -250,10 +250,9 @@ extension Cleepp {
       Self.busy = false
       
       #if FOR_APP_STORE
-        // TODO: enable reviews when this target is truly building for the app store
-//      if !queue.isOn {
-//        AppStoreReview.ask(after: 20)
-//      }
+      if !queue.isOn {
+        AppStoreReview.ask(after: 20)
+      }
       #endif
     }
     
@@ -273,6 +272,11 @@ extension Cleepp {
   func queuedPasteMultiple(_ sender: AnyObject) {
     menu.cancelTrackingWithoutAnimation() // do this before any alerts appear
     guard !Self.busy else {
+      return
+    }
+    
+    guard Cleepp.allowPasteMultiple else {
+      showBonusFeaturePromotionAlert()
       return
     }
     
@@ -306,6 +310,11 @@ extension Cleepp {
   func queuedPasteAll(_ sender: AnyObject) {
     menu.cancelTrackingWithoutAnimation() // do this before any alerts appear
     guard !Self.busy else {
+      return
+    }
+    
+    guard Cleepp.allowPasteMultiple else {
+      showBonusFeaturePromotionAlert()
       return
     }
     
@@ -353,10 +362,9 @@ extension Cleepp {
         Self.busy = false
         
         #if FOR_APP_STORE
-        // TODO: enable reviews when this target is truly building for the app store
-//        if !queue.isOn && interactive {
-//          AppStoreReview.ask(after: 20)
-//        }
+        if !queue.isOn && interactive {
+          AppStoreReview.ask(after: 20)
+        }
         #endif
       }
       
@@ -535,6 +543,11 @@ extension Cleepp {
       return
     }
     
+    guard Cleepp.allowUndoCopy else {
+      showBonusFeaturePromotionAlert()
+      return
+    }
+    
     guard let removeItem = history.first else {
       return
     }
@@ -589,6 +602,26 @@ extension Cleepp {
   @IBAction
   func quit(_ sender: AnyObject) {
     NSApp.terminate(sender)
+  }
+  
+  // MARK: -
+  
+  private func showBonusFeaturePromotionAlert() {
+    let alert = NSAlert()
+    alert.alertStyle = .informational
+    alert.messageText = "Support the app's continuing development to unlock this feature?" // NSLocalizedString("promoteextras_alert_message", comment: "")
+    alert.informativeText = "The button below takes you to the Support Us page of the Settings window where you can make an in-app purchase to support the makers of this app, and for doing so this and other extra features will be unlocked."
+      // NSLocalizedString("promoteextras_alert_comment", comment: "")
+    alert.addButton(withTitle: "Open Settings")   // NSLocalizedString("promoteextras_alert_show_settings", comment: ""))
+    alert.addButton(withTitle: "Cancel")          // NSLocalizedString("promoteextras_alert_cancel", comment: ""))
+    //alert.icon = NSImage(named: "NSSecurity") // is app icon the default if we don't set this?
+    
+    switch alert.runModal() {
+    case NSApplication.ModalResponse.alertFirstButtonReturn:
+      showSettings(selectingPane: .purchase)
+    default:
+      break
+    }
   }
   
   // MARK: -

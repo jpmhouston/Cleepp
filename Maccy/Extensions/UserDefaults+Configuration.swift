@@ -38,7 +38,9 @@ extension UserDefaults {
     static let highlightMatch = "highlightMatch"
     #if CLEEPP
     static let completedIntro = "completedIntro"
-    static let proQueueMode = "proQueueMode"
+    static let promoteExtras = "promoteExtras"
+    static let promoteExtrasExpires = "promoteExtrasExpires"
+    static let promoteExtrasExpiration = "promoteExtrasExpiration"
     #endif
 
     static var showInStatusBar: String {
@@ -267,9 +269,36 @@ extension UserDefaults {
     set { set(newValue, forKey: Keys.completedIntro) }
   }
   
-  public var proQueueMode: Bool {
-    get { bool(forKey: Keys.proQueueMode) }
-    set { set(newValue, forKey: Keys.proQueueMode) }
+  public var promoteExtras: Bool {
+    get { bool(forKey: Keys.promoteExtras) }
+    set { set(newValue, forKey: Keys.promoteExtras) }
+  }
+  
+  public var promoteExtrasExpires: Bool {
+    get { bool(forKey: Keys.promoteExtrasExpires) }
+    set { set(newValue, forKey: Keys.promoteExtrasExpires) }
+  }
+  
+  public var promoteExtrasExpiration: DateComponents? {
+    get {
+      if let dateData = data(forKey: Keys.promoteExtrasExpiration) {
+        do {
+          return try JSONDecoder().decode(DateComponents.self, from: dateData)
+        } catch {}
+      }
+      return nil
+    }
+    set {
+      if let dateComponents = newValue {
+        do {
+          let dateData = try JSONEncoder().encode(dateComponents)
+          set(dateData, forKey: Keys.promoteExtrasExpiration)
+          return
+        } catch {}
+      }
+      removeObject(forKey: Keys.promoteExtrasExpiration)
+    }
   }
   #endif
+  
 }

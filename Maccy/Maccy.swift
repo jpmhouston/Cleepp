@@ -33,7 +33,19 @@ class Maccy: NSObject {
   static var allowReplayFromHistory = false
   static var allowPasteMultiple = false
   static var allowUndoCopy = false
+  
   static var allowDictinctStorageSize: Bool { Self.allowFullyExpandedHistory || Self.allowHistorySearch }
+  #if FOR_APP_STORE
+  static let allowPurchases = true
+  #else
+  static let allowPurchases = false
+  #endif
+  
+  static var firstLaunch = false
+  #if FOR_APP_STORE
+  static var hasBoughtExtras = false
+  var promotionExpirationTimer: Timer?
+  #endif
   
   #if FOR_APP_STORE
   private let purchases = Purchases()
@@ -49,18 +61,6 @@ class Maccy: NSObject {
   // TODO: create these in the +Actions extension using associated objects?
   internal var iconBlinkTimer: DispatchSourceTimer?
   internal var copyTimeoutTimer: DispatchSourceTimer?
-  
-//  // TODO: remove when replaced by queue properties
-//  static var isQueueModeOn = false
-//  static var queueSize = 0
-//  internal var queueHeadIndex: Int? {
-//    if Self.queueSize < 1 {
-//      nil
-//    } else {
-//      Self.queueSize - 1
-//    }
-//  }
-//  internal var permitEmptyQueueMode = false // affects behavior when deleting history items
   
   private var numberQueuedAlert: NSAlert {
     let alert = NSAlert()
@@ -93,9 +93,10 @@ class Maccy: NSObject {
 #if CLEEPP
   // omits the pins panel, app store build gets the purchase panel
   #if FOR_APP_STORE
+  internal lazy var generalSettingsPaneViewController = GeneralSettingsViewController()
   internal lazy var settingsWindowController = SettingsWindowController(
     panes: [
-      GeneralSettingsViewController(),
+      generalSettingsPaneViewController,
       AppearanceSettingsViewController(),
       PurchaseSettingsViewController(purchases: purchases),
       StorageSettingsViewController(),
@@ -170,7 +171,7 @@ class Maccy: NSObject {
     settingsWindowController.window?.collectionBehavior.formUnion(.moveToActiveSpace)
 
     #if CLEEPP
-    initializeFeatureFlags()
+    initializeStateFlags()
     
     queue = ClipboardQueue(clipboard: clipboard, history: history)
     menu = CleeppMenu.load(withHistory: history, queue: queue, owner: self)
@@ -293,24 +294,121 @@ class Maccy: NSObject {
   }
 
 #if CLEEPP
-  private func initializeFeatureFlags() {
+  private func initializeStateFlags() {
+    let userDefaults = UserDefaults.standard
+    Self.firstLaunch = userDefaults.dictionaryRepresentation().isEmpty
+    if Self.firstLaunch {
+      // set something in userdefaults to know on next launch it's not the first
+      userDefaults.completedIntro = false
+    }
+    
     #if BONUS_FEATUES_ON
     setFeatureFlags(givenPurchase: true)
+    #endif
+    #if FOR_APP_STORE && BONUS_FEATUES_ON
+    Self.hasBoughtExtras = true
     #endif
     #if FOR_APP_STORE
     purchases.start(withObserver: self) { [weak self] _, update in
       self?.purchasesUpdated(update)
     }
     #endif
+    
+    #if FOR_APP_STORE && !BONUS_FEATUES_ON
+    if Self.firstLaunch {
+      // defaults defined here in code are to promote extras temporarily
+      userDefaults.promoteExtras = true
+      userDefaults.promoteExtrasExpires = true
+      
+      if let expiration = promoteExtrasExpirationDate() {
+        setPromoteExtrasExpirationTimer(expiration)
+        userDefaults.promoteExtrasExpiration = expiration
+      }
+      else {
+        // cannot set timer, don't promote the bonus features after all
+        userDefaults.promoteExtras = false
+      }
+    }
+    else if userDefaults.promoteExtras && userDefaults.promoteExtrasExpires {
+      if let expiration = userDefaults.promoteExtrasExpiration, let date = expiration.date,
+         date.timeIntervalSinceNow > 0 // ie. date is in the future
+      {
+        setPromoteExtrasExpirationTimer(expiration)
+      } else {
+        // already passed expiration, cancel promoting the bonus features
+        userDefaults.promoteExtras = false
+      }
+    }
+    #endif
   }
   
   #if FOR_APP_STORE
+  func resetPromoteExtrasExpirationTimer(on: Bool) {
+    if on {
+      if let expiration = promoteExtrasExpirationDate() {
+        setPromoteExtrasExpirationTimer(expiration)
+        UserDefaults.standard.promoteExtrasExpiration = expiration
+      }
+    } else {
+      clearPromoteExtrasExpirationTimer()
+      UserDefaults.standard.promoteExtrasExpiration = nil
+    }
+  }
+  
+  private func setPromoteExtrasExpirationTimer(_ dateComponents: DateComponents) {
+    guard let date = dateComponents.date, date.timeIntervalSinceNow > 0 else {
+      // can't set timer to this date, just do expiration now
+      UserDefaults.standard.promoteExtras = false
+      return
+    }
+    nop() // to allow logging breakpoint here
+    promotionExpirationTimer = Timer.scheduledTimer(withTimeInterval: date.timeIntervalSinceNow, repeats: false) { [weak self] _ in
+      self?.promotionExpirationTimer = nil
+      UserDefaults.standard.promoteExtras = false
+      DispatchQueue.main.async {
+        self?.generalSettingsPaneViewController.promoteExtrasStateChanged()
+      }
+    }
+  }
+  
+  private func clearPromoteExtrasExpirationTimer() {
+    promotionExpirationTimer?.invalidate()
+    promotionExpirationTimer = nil
+  }
+  
+  private func promoteExtrasExpirationDate() -> DateComponents? {
+    let calendar = Calendar(identifier: .gregorian)
+    #if DEBUG
+    guard let minuteFromNow = calendar.date(byAdding: .minute, value: 1, to: Date(), wrappingComponents: true) else {
+      return nil
+    }
+    return calendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar], from: minuteFromNow)
+    #else
+    guard let nextWeek = calendar.date(byAdding: .day, value: 7, to: Date(), wrappingComponents: true) else {
+      return nil
+    }
+    return calendar.dateComponents([.year, .month, .day, .calendar], from: nextWeek)
+    #endif
+  }
+  
+  class LocalShortDateFormatter: DateFormatter, @unchecked Sendable { // used by logging breakpoint in setPromoteExtrasExpirationTimer
+    override init() { super.init(); dateStyle = .short; timeStyle = .short }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+  }
+  
   private func purchasesUpdated(_ update: Purchases.ObservationUpdate) {
     #if !BONUS_FEATUES_ON
     setFeatureFlags(givenPurchase: purchases.hasBoughtExtras)
+    Self.hasBoughtExtras = purchases.hasBoughtExtras
+    
+    if purchases.hasBoughtExtras {
+      clearPromoteExtrasExpirationTimer()
+      UserDefaults.standard.promoteExtras = false
+      UserDefaults.standard.promoteExtrasExpiration = nil
+    }
     #endif
   }
-  #endif
+  #endif // FOR_APP_STORE
   
   private func setFeatureFlags(givenPurchase hasPurchased: Bool) {
     Self.allowFullyExpandedHistory = hasPurchased
@@ -579,8 +677,9 @@ class Maccy: NSObject {
 
   private func disableUnusedGlobalHotkeys() {
     let names: [KeyboardShortcuts.Name] = [.delete, .pin]
-    names.forEach(KeyboardShortcuts.disable)
-
+    KeyboardShortcuts.disable(names)
+    //names.forEach(KeyboardShortcuts.disable) // if KyboardShortcuts >1.11.0 change to: KeyboardShortcuts.disable(names)
+    
     NotificationCenter.default.addObserver(
       forName: Notification.Name("KeyboardShortcuts_shortcutByNameDidChange"),
       object: nil,

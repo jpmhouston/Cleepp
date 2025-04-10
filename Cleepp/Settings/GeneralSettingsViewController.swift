@@ -35,12 +35,15 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
   @IBOutlet weak var openLoginItemsPanelButton: NSButton!
   @IBOutlet weak var openLoginItemsPanelRow: NSGridRow!
   @IBOutlet weak var automaticUpdatesButton: NSButton!
-  @IBOutlet weak var searchModeSeparator: NSView!
-  @IBOutlet weak var searchModeLabel: NSTextField!
   @IBOutlet weak var searchModeButton: NSPopUpButton!
-  @IBOutlet weak var checkForUpdatesOptionRow: NSGridRow!
-  @IBOutlet weak var checkForUpdatesButtonRow: NSGridRow!
-  
+  @IBOutlet weak var promoteExtrasCheckbox: NSButton!
+  @IBOutlet weak var promoteExtrasExpiresCheckbox: NSButton!
+  @IBOutlet weak var checkForUpdatesItemsRow: NSGridRow!
+  @IBOutlet weak var searchModeSeparatorRow: NSGridRow!
+  @IBOutlet weak var searchModeItemsRow: NSGridRow!
+  @IBOutlet weak var promoteExtrasSeparatorRow: NSGridRow!
+  @IBOutlet weak var promoteExtrasItemsRow: NSGridRow!
+
   #if ALLOW_SPARKLE_UPDATES
   init(updater: SPUUpdater) {
     sparkleUpdater = updater
@@ -58,12 +61,29 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    startHotkeyContainerView.addSubview(startHotkeyRecorder)
-    copyHotkeyContainerView.addSubview(copyHotkeyRecorder)
-    pasteHotkeyContainerView.addSubview(pasteHotkeyRecorder)
+    
+    func addSubviewWithManualLayout(_ par: NSView, _ sub: NSView) {
+      par.translatesAutoresizingMaskIntoConstraints = false
+      sub.translatesAutoresizingMaskIntoConstraints = false
+      par.addSubview(sub)
+      par.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[s]|", metrics: nil, views: ["s": sub]))
+      par.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[s]|", metrics: nil, views: ["s": sub]))
+    }
+    // using the above func instead of addSubview fixed layout issues with the KeyboardShortcuts.RecorderCocoa views
+    addSubviewWithManualLayout(startHotkeyContainerView, startHotkeyRecorder)
+    addSubviewWithManualLayout(copyHotkeyContainerView, copyHotkeyRecorder)
+    addSubviewWithManualLayout(pasteHotkeyContainerView, pasteHotkeyRecorder)
     
     #if !ALLOW_SPARKLE_UPDATES
     hideSparkleUpdateRows()
+    #endif
+    
+    #if FOR_APP_STORE
+    if #unavailable(macOS 14) { // badged menu items first available in macOS 14
+      hidePromoteExtrasRow()
+    }
+    #else
+    hidePromoteExtrasRow()
     #endif
     
     if #available(macOS 13.0, *) {
@@ -78,9 +98,18 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
     populateLaunchAtLogin()
     populateSparkleAutomaticUpdates()
     populateSearchMode()
-    showSearchOption(Cleepp.allowHistorySearch)
+    #if FOR_APP_STORE
+    populatePromoteExtrasOptions()
+    #endif
+    showSearchOptionRows(Cleepp.allowHistorySearch)
   }
-
+  
+  public func promoteExtrasStateChanged() {
+    #if FOR_APP_STORE
+    populatePromoteExtrasOptions()
+    #endif
+  }
+  
   @IBAction func sparkleAutomaticUpdatesChanged(_ sender: NSButton) {
     #if ALLOW_SPARKLE_UPDATES
     sparkleUpdater.automaticallyChecksForUpdates = (sender.state == .on)
@@ -163,15 +192,57 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
     }
   }
 
-  private func showSearchOption(_ show: Bool) {
-    searchModeSeparator.isHidden = !show
-    searchModeLabel.isHidden = !show
-    searchModeButton.isHidden = !show
+  #if FOR_APP_STORE
+  private func populatePromoteExtrasOptions() {
+    promoteExtrasCheckbox.state = UserDefaults.standard.promoteExtras ? .on : .off
+    promoteExtrasExpiresCheckbox.state = UserDefaults.standard.promoteExtrasExpires ? .on : .off
+    promoteExtrasCheckbox.isEnabled = !Cleepp.hasBoughtExtras
+    promoteExtrasExpiresCheckbox.isEnabled = !Cleepp.hasBoughtExtras && UserDefaults.standard.promoteExtras
   }
-
+  
+  private func updatePromoteExtrasExpirationOption() {
+    promoteExtrasExpiresCheckbox.isEnabled = !Cleepp.hasBoughtExtras && UserDefaults.standard.promoteExtras
+  }
+  
+  private func updatePromoteExtrasExpirationTimer() {
+    guard let cleepp = (NSApp.delegate as? AppDelegate)?.maccy else {
+      return
+    }
+    if UserDefaults.standard.promoteExtras && UserDefaults.standard.promoteExtrasExpires {
+      cleepp.resetPromoteExtrasExpirationTimer(on: true)
+    } else if !UserDefaults.standard.promoteExtras || !UserDefaults.standard.promoteExtrasExpires{
+      cleepp.resetPromoteExtrasExpirationTimer(on: false)
+    }
+  }
+  #endif
+  
+  @IBAction func promoteExtrasChanged(_ sender: NSButton) {
+    #if FOR_APP_STORE
+    UserDefaults.standard.promoteExtras = (sender.state == .on)
+    updatePromoteExtrasExpirationOption()
+    updatePromoteExtrasExpirationTimer()
+    #endif
+  }
+  
+  @IBAction func promoteExtrasExpiresChanged(_ sender: NSButton) {
+    #if FOR_APP_STORE
+    UserDefaults.standard.promoteExtrasExpires = (sender.state == .on)
+    updatePromoteExtrasExpirationTimer()
+    #endif
+  }
+  
+  private func showSearchOptionRows(_ show: Bool) {
+    searchModeSeparatorRow.isHidden = !show
+    searchModeItemsRow.isHidden = !show
+  }
+  
   private func hideSparkleUpdateRows() {
-    checkForUpdatesOptionRow.isHidden = true
-    checkForUpdatesButtonRow.isHidden = true
+    checkForUpdatesItemsRow.isHidden = true
+  }
+  
+  private func hidePromoteExtrasRow() {
+    promoteExtrasSeparatorRow.isHidden = true
+    promoteExtrasItemsRow.isHidden = true
   }
   
   private func showLaunchAtLoginRow() {

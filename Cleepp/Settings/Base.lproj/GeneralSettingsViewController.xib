@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralSettingsViewController" customModule="Batch_Clipboard" customModuleProvider="target">
             <connections>
                 <outlet property="automaticUpdatesButton" destination="Mxc-Pf-Ef9" id="443-Kc-WHD"/>
-                <outlet property="checkForUpdatesButtonRow" destination="bpM-Oe-CBP" id="VBQ-Mw-0J1"/>
-                <outlet property="checkForUpdatesOptionRow" destination="Ssu-ST-LDz" id="HaS-lu-XC3"/>
+                <outlet property="checkForUpdatesItemsRow" destination="bpM-Oe-CBP" id="VBQ-Mw-0J1"/>
                 <outlet property="copyHotkeyContainerView" destination="gv6-rV-zkI" id="nuk-d3-lAf"/>
                 <outlet property="launchAtLoginButton" destination="mOE-Th-WLC" id="xDm-OD-zqC"/>
                 <outlet property="launchAtLoginRow" destination="1lR-od-X06" id="1dh-3k-rja"/>
                 <outlet property="openLoginItemsPanelButton" destination="fWD-v1-Rli" id="TCE-ct-nLA"/>
                 <outlet property="openLoginItemsPanelRow" destination="E4T-ss-Za5" id="9vD-8I-pRQ"/>
                 <outlet property="pasteHotkeyContainerView" destination="pPs-rF-k8m" id="9te-4V-6tN"/>
+                <outlet property="promoteExtrasCheckbox" destination="GBC-St-esC" id="qyF-2c-G8X"/>
+                <outlet property="promoteExtrasExpiresCheckbox" destination="S6J-6l-2IE" id="VU6-gB-qyr"/>
+                <outlet property="promoteExtrasItemsRow" destination="t58-uQ-JlU" id="DDV-mT-cYr"/>
+                <outlet property="promoteExtrasSeparatorRow" destination="Dbm-ep-fOl" id="AIb-9J-20z"/>
                 <outlet property="searchModeButton" destination="W4h-tN-MTS" id="pfI-eV-8QZ"/>
-                <outlet property="searchModeLabel" destination="Q7N-u9-cfJ" id="Qpp-jn-C9c"/>
-                <outlet property="searchModeSeparator" destination="fMY-lL-A9Q" id="LyO-9W-ahU"/>
+                <outlet property="searchModeItemsRow" destination="Ahg-HZ-SOL" id="rvp-7d-uEJ"/>
+                <outlet property="searchModeSeparatorRow" destination="gQG-qR-qof" id="mq4-5n-HwW"/>
                 <outlet property="startHotkeyContainerView" destination="wkA-3I-kqY" id="kTs-tU-jLB"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -26,21 +29,25 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="436"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="562"/>
             <subviews>
                 <gridView xPlacement="leading" yPlacement="top" rowAlignment="lastBaseline" rowSpacing="8" columnSpacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="GOB-4Q-pQY">
-                    <rect key="frame" x="24" y="20" width="432" height="396"/>
+                    <rect key="frame" x="24" y="20" width="432" height="522"/>
                     <rows>
                         <gridRow id="1lR-od-X06"/>
                         <gridRow id="E4T-ss-Za5"/>
-                        <gridRow id="Ssu-ST-LDz"/>
                         <gridRow id="bpM-Oe-CBP"/>
+                        <gridRow id="9S5-KO-hlC"/>
                         <gridRow id="mzz-6k-Dz9"/>
+                        <gridRow id="prs-SG-Pfl"/>
                         <gridRow id="tKf-uu-raQ"/>
-                        <gridRow yPlacement="top" rowAlignment="lastBaseline" id="1lh-Qw-cAx"/>
-                        <gridRow rowAlignment="lastBaseline" id="rSH-D5-fQU"/>
+                        <gridRow id="1lh-Qw-cAx"/>
+                        <gridRow id="rSH-D5-fQU"/>
+                        <gridRow id="fCE-Og-dJB"/>
                         <gridRow id="gQG-qR-qof"/>
                         <gridRow id="Ahg-HZ-SOL"/>
+                        <gridRow id="Dbm-ep-fOl"/>
+                        <gridRow id="t58-uQ-JlU"/>
                     </rows>
                     <columns>
                         <gridColumn xPlacement="trailing" id="vOJ-9h-G8Y"/>
@@ -50,7 +57,7 @@
                         <gridCell row="1lR-od-X06" column="vOJ-9h-G8Y" id="Wx5-lS-Xrs"/>
                         <gridCell row="1lR-od-X06" column="pQU-Pz-q1v" id="IOf-sB-Gav">
                             <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mOE-Th-WLC">
-                                <rect key="frame" x="130" y="379" width="119" height="18"/>
+                                <rect key="frame" x="130" y="505" width="119" height="18"/>
                                 <buttonCell key="cell" type="check" title="Launch at login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Cfl-qm-UkM">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -63,10 +70,10 @@
                         <gridCell row="E4T-ss-Za5" column="vOJ-9h-G8Y" id="VPs-T2-TJo"/>
                         <gridCell row="E4T-ss-Za5" column="pQU-Pz-q1v" id="ZAg-Pc-caU">
                             <stackView key="contentView" distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N6u-W6-DOj">
-                                <rect key="frame" x="132" y="282" width="300" height="90"/>
+                                <rect key="frame" x="132" y="416" width="300" height="82"/>
                                 <subviews>
                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GaN-gj-k5w">
-                                        <rect key="frame" x="-2" y="34" width="304" height="56"/>
+                                        <rect key="frame" x="-2" y="26" width="304" height="56"/>
                                         <textFieldCell key="cell" id="u7U-Li-5Kf">
                                             <font key="font" metaFont="smallSystem"/>
                                             <string key="title">The ability to automatically add this app as a Login Items is only avaialable in macOS 13 and later. Use button below to open the Settings panel for adding or removing Batch Clipboard manually.</string>
@@ -75,7 +82,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fWD-v1-Rli">
-                                        <rect key="frame" x="0.0" y="7" width="148" height="19"/>
+                                        <rect key="frame" x="0.0" y="-1" width="148" height="19"/>
                                         <buttonCell key="cell" type="roundRect" title="Open Login Items panel" bezelStyle="roundedRect" alignment="center" borderStyle="border" inset="2" id="CGo-tu-azT">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="cellTitle"/>
@@ -84,13 +91,52 @@
                                             <action selector="openLoginItemsPanel:" target="-2" id="6dn-og-Hq2"/>
                                         </connections>
                                     </button>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Xp3-8q-VfN">
-                                        <rect key="frame" x="0.0" y="0.0" width="163" height="0.0"/>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </gridCell>
+                        <gridCell row="bpM-Oe-CBP" column="vOJ-9h-G8Y" id="F1h-En-eCd"/>
+                        <gridCell row="bpM-Oe-CBP" column="pQU-Pz-q1v" id="4MC-s5-NJN">
+                            <stackView key="contentView" distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iDZ-rJ-xSU">
+                                <rect key="frame" x="132" y="358" width="220" height="50"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="F6o-c8-bpf">
+                                        <rect key="frame" x="0.0" y="50" width="163" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" id="vp5-Tl-ANo"/>
+                                            <constraint firstAttribute="height" id="y5g-9Q-5d0"/>
                                         </constraints>
                                     </customView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mxc-Pf-Ef9">
+                                        <rect key="frame" x="-2" y="25" width="222" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Check for updates automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="avb-QJ-T0h">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="sparkleAutomaticUpdatesChanged:" target="-2" id="pjv-0I-Ahw"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ik8-mb-VoG">
+                                        <rect key="frame" x="20" y="-1" width="77" height="19"/>
+                                        <buttonCell key="cell" type="roundRect" title="Check now" bezelStyle="roundedRect" alignment="center" borderStyle="border" inset="2" id="8Rb-OS-d59">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="cellTitle"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="sparkleUpdateCheck:" target="-2" id="hWZ-ac-pYU"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Ik8-mb-VoG" firstAttribute="leading" secondItem="Mxc-Pf-Ef9" secondAttribute="leading" constant="20" id="vcd-dx-Wzm"/>
+                                </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
@@ -103,41 +149,33 @@
                                 </customSpacing>
                             </stackView>
                         </gridCell>
-                        <gridCell row="Ssu-ST-LDz" column="vOJ-9h-G8Y" id="gUk-1z-sYH"/>
-                        <gridCell row="Ssu-ST-LDz" column="pQU-Pz-q1v" id="qhX-wf-DeN">
-                            <button key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mxc-Pf-Ef9">
-                                <rect key="frame" x="130" y="257" width="222" height="18"/>
-                                <buttonCell key="cell" type="check" title="Check for updates automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="avb-QJ-T0h">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="sparkleAutomaticUpdatesChanged:" target="-2" id="pjv-0I-Ahw"/>
-                                </connections>
-                            </button>
+                        <gridCell row="9S5-KO-hlC" column="vOJ-9h-G8Y" headOfMergedCell="ngL-2y-bq4" id="ngL-2y-bq4">
+                            <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jni-KE-nIm">
+                                <rect key="frame" x="332" y="350" width="100" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="H75-ZQ-Yck"/>
+                                </constraints>
+                            </customView>
                         </gridCell>
-                        <gridCell row="bpM-Oe-CBP" column="vOJ-9h-G8Y" id="F1h-En-eCd"/>
-                        <gridCell row="bpM-Oe-CBP" column="pQU-Pz-q1v" id="4MC-s5-NJN">
-                            <button key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ik8-mb-VoG">
-                                <rect key="frame" x="132" y="168" width="77" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="Check now" bezelStyle="roundedRect" alignment="center" borderStyle="border" inset="2" id="8Rb-OS-d59">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="cellTitle"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="sparkleUpdateCheck:" target="-2" id="hWZ-ac-pYU"/>
-                                </connections>
-                            </button>
-                        </gridCell>
-                        <gridCell row="mzz-6k-Dz9" column="vOJ-9h-G8Y" headOfMergedCell="hec-ch-tJx" yPlacement="center" id="hec-ch-tJx">
+                        <gridCell row="9S5-KO-hlC" column="pQU-Pz-q1v" headOfMergedCell="ngL-2y-bq4" id="RGn-4L-Ntz"/>
+                        <gridCell row="mzz-6k-Dz9" column="vOJ-9h-G8Y" headOfMergedCell="hec-ch-tJx" xPlacement="fill" yPlacement="center" id="hec-ch-tJx">
                             <box key="contentView" verticalHuggingPriority="700" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Mfq-pZ-sSn">
-                                <rect key="frame" x="332" y="158" width="100" height="5"/>
+                                <rect key="frame" x="0.0" y="339" width="432" height="5"/>
                             </box>
                         </gridCell>
                         <gridCell row="mzz-6k-Dz9" column="pQU-Pz-q1v" headOfMergedCell="hec-ch-tJx" id="hE2-yX-ng0"/>
+                        <gridCell row="prs-SG-Pfl" column="vOJ-9h-G8Y" headOfMergedCell="mkT-Id-xVf" id="mkT-Id-xVf">
+                            <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9dz-rj-Rjl">
+                                <rect key="frame" x="332" y="333" width="100" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="yuB-eR-Rbd"/>
+                                </constraints>
+                            </customView>
+                        </gridCell>
+                        <gridCell row="prs-SG-Pfl" column="pQU-Pz-q1v" headOfMergedCell="mkT-Id-xVf" id="ekT-NX-dtt"/>
                         <gridCell row="tKf-uu-raQ" column="vOJ-9h-G8Y" id="gaG-xV-jaJ">
                             <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1Q-kI-egx">
-                                <rect key="frame" x="45" y="119" width="76" height="23"/>
+                                <rect key="frame" x="45" y="292" width="76" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="ccs-88-5v0"/>
                                 </constraints>
@@ -149,18 +187,18 @@
                             </textField>
                         </gridCell>
                         <gridCell row="tKf-uu-raQ" column="pQU-Pz-q1v" id="JTS-jd-trE">
-                            <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wkA-3I-kqY">
-                                <rect key="frame" x="132" y="122" width="100" height="30"/>
+                            <customView key="contentView" identifier="startkeyview" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wkA-3I-kqY">
+                                <rect key="frame" x="132" y="295" width="120" height="30"/>
                                 <string key="toolTip">Global shortcut key to start a new clipboard item batch.
 Default: none.</string>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="j2p-Ny-ogZ"/>
+                                    <constraint firstAttribute="width" constant="120" id="j2p-Ny-ogZ"/>
                                 </constraints>
                             </customView>
                         </gridCell>
                         <gridCell row="1lh-Qw-cAx" column="vOJ-9h-G8Y" id="2m8-9a-mJO">
                             <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C8J-Mx-Lzz">
-                                <rect key="frame" x="43" y="78" width="78" height="23"/>
+                                <rect key="frame" x="43" y="251" width="78" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="10R-0q-RDn"/>
                                 </constraints>
@@ -172,18 +210,18 @@ Default: none.</string>
                             </textField>
                         </gridCell>
                         <gridCell row="1lh-Qw-cAx" column="pQU-Pz-q1v" id="t3H-4Z-90w">
-                            <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gv6-rV-zkI">
-                                <rect key="frame" x="132" y="81" width="100" height="30"/>
+                            <customView key="contentView" identifier="copykeyview" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gv6-rV-zkI">
+                                <rect key="frame" x="132" y="254" width="120" height="30"/>
                                 <string key="toolTip">Global shortcut key to copy into the batch queue, starting new batch if one not yet started.
 Default: ^⌘C.</string>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Ntm-y4-aXK"/>
+                                    <constraint firstAttribute="width" constant="120" id="Ntm-y4-aXK"/>
                                 </constraints>
                             </customView>
                         </gridCell>
                         <gridCell row="rSH-D5-fQU" column="vOJ-9h-G8Y" id="MkQ-Ti-RAy">
                             <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UNS-12-xWP">
-                                <rect key="frame" x="41" y="37" width="80" height="23"/>
+                                <rect key="frame" x="41" y="210" width="80" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="ARz-S4-0pY"/>
                                 </constraints>
@@ -195,24 +233,33 @@ Default: ^⌘C.</string>
                             </textField>
                         </gridCell>
                         <gridCell row="rSH-D5-fQU" column="pQU-Pz-q1v" id="yVM-gZ-e0i">
-                            <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pPs-rF-k8m">
-                                <rect key="frame" x="132" y="40" width="100" height="30"/>
+                            <customView key="contentView" identifier="pastekeyview" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pPs-rF-k8m">
+                                <rect key="frame" x="132" y="213" width="120" height="30"/>
                                 <string key="toolTip">Global shortcut key to paste next item from the batch queue.
 Default: ^⌘P.</string>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Nux-kj-G8Q"/>
+                                    <constraint firstAttribute="width" constant="120" id="Nux-kj-G8Q"/>
                                 </constraints>
                             </customView>
                         </gridCell>
+                        <gridCell row="fCE-Og-dJB" column="vOJ-9h-G8Y" headOfMergedCell="rT5-pf-281" id="rT5-pf-281">
+                            <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RDM-BI-fNa">
+                                <rect key="frame" x="332" y="198" width="100" height="4"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="blX-8n-5jL"/>
+                                </constraints>
+                            </customView>
+                        </gridCell>
+                        <gridCell row="fCE-Og-dJB" column="pQU-Pz-q1v" headOfMergedCell="rT5-pf-281" id="8ob-ud-v6j"/>
                         <gridCell row="gQG-qR-qof" column="vOJ-9h-G8Y" headOfMergedCell="8Tc-ki-XIw" xPlacement="fill" id="8Tc-ki-XIw">
                             <box key="contentView" verticalHuggingPriority="700" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="fMY-lL-A9Q">
-                                <rect key="frame" x="0.0" y="26" width="432" height="5"/>
+                                <rect key="frame" x="0.0" y="187" width="432" height="5"/>
                             </box>
                         </gridCell>
                         <gridCell row="gQG-qR-qof" column="pQU-Pz-q1v" headOfMergedCell="8Tc-ki-XIw" id="a3u-rN-xNI"/>
                         <gridCell row="Ahg-HZ-SOL" column="vOJ-9h-G8Y" id="LiU-w2-SdI">
-                            <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q7N-u9-cfJ">
-                                <rect key="frame" x="71" y="3" width="50" height="16"/>
+                            <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q7N-u9-cfJ">
+                                <rect key="frame" x="71" y="72" width="50" height="16"/>
                                 <textFieldCell key="cell" alignment="right" title="Search:" id="eLD-CL-D8J">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -221,8 +268,8 @@ Default: ^⌘P.</string>
                             </textField>
                         </gridCell>
                         <gridCell row="Ahg-HZ-SOL" column="pQU-Pz-q1v" id="u4O-7G-Ykh">
-                            <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W4h-tN-MTS">
-                                <rect key="frame" x="129" y="-4" width="161" height="25"/>
+                            <popUpButton key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W4h-tN-MTS">
+                                <rect key="frame" x="129" y="65" width="161" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Exact" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="OJz-OA-cKK" id="w1r-h5-MLH">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="message"/>
@@ -240,6 +287,59 @@ Default: ^⌘P.</string>
                                 </connections>
                             </popUpButton>
                         </gridCell>
+                        <gridCell row="Dbm-ep-fOl" column="vOJ-9h-G8Y" headOfMergedCell="f9i-B9-4Vy" xPlacement="fill" id="f9i-B9-4Vy">
+                            <box key="contentView" verticalHuggingPriority="700" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="FzF-pF-d1C">
+                                <rect key="frame" x="0.0" y="58" width="432" height="5"/>
+                            </box>
+                        </gridCell>
+                        <gridCell row="Dbm-ep-fOl" column="pQU-Pz-q1v" headOfMergedCell="f9i-B9-4Vy" xPlacement="fill" id="ylb-c7-FBG"/>
+                        <gridCell row="t58-uQ-JlU" column="vOJ-9h-G8Y" id="vcE-dg-xAt"/>
+                        <gridCell row="t58-uQ-JlU" column="pQU-Pz-q1v" id="BVc-ZY-77k">
+                            <stackView key="contentView" distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qym-v6-aJj">
+                                <rect key="frame" x="132" y="0.0" width="203" height="52"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="W1n-e1-QEG">
+                                        <rect key="frame" x="0.0" y="48" width="163" height="4"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="4" id="Xzi-Ls-iK1"/>
+                                        </constraints>
+                                    </customView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GBC-St-esC">
+                                        <rect key="frame" x="-2" y="23" width="205" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Show Locked Bonus Features" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cXb-pE-vZ2">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="promoteExtrasChanged:" target="-2" id="zVB-lu-yez"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S6J-6l-2IE">
+                                        <rect key="frame" x="18" y="-1" width="112" height="18"/>
+                                        <buttonCell key="cell" type="check" title="For One Week" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="yyd-IU-Dmf">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="promoteExtrasExpiresChanged:" target="-2" id="hCl-Ks-TPR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="S6J-6l-2IE" firstAttribute="leading" secondItem="GBC-St-esC" secondAttribute="leading" constant="20" id="wXf-gA-Mhr"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </gridCell>
                     </gridCells>
                 </gridView>
             </subviews>
@@ -250,7 +350,7 @@ Default: ^⌘P.</string>
                 <constraint firstItem="GOB-4Q-pQY" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="lO1-LZ-qbm"/>
                 <constraint firstItem="GOB-4Q-pQY" firstAttribute="width" secondItem="Hz6-mo-xeY" secondAttribute="width" multiplier="0.9" id="zZd-wh-7Ux"/>
             </constraints>
-            <point key="canvasLocation" x="193" y="28"/>
+            <point key="canvasLocation" x="193" y="27"/>
         </customView>
     </objects>
 </document>

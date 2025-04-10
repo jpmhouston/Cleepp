@@ -547,17 +547,22 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
   }
   
   private func updateShortcuts() {
-    queueStartItem?.setShortcut(for: .queueStart)
-    queuedCopyItem?.setShortcut(for: .queuedCopy)
-    queuedPasteItem?.setShortcut(for: .queuedPaste)
-    // might have a start stop hotkey at some point, something like:
-    //if !queue.isOn {
-    //  queueStartItem?.setShortcut(for: .queueStartStop)
-    //  queueStopItem?.setShortcut(for: nil)
-    //} else {
-    //  queueStartItem?.setShortcut(for: nil)
-    //  queueStopItem?.setShortcut(for: .queueStartStop)
-    //}
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      
+      queueStartItem?.setShortcut(for: .queueStart)
+      queuedCopyItem?.setShortcut(for: .queuedCopy)
+      queuedPasteItem?.setShortcut(for: .queuedPaste)
+      
+      // might have a start stop hotkey at some point, something like:
+      //if !queue.isOn {
+      //  queueStartItem?.setShortcut(for: .queueStartStop)
+      //  queueStopItem?.setShortcut(for: nil)
+      //} else {
+      //  queueStartItem?.setShortcut(for: nil)
+      //  queueStopItem?.setShortcut(for: .queueStartStop)
+      //}
+    }
   }
   
   private func highlightNext(_ items: [NSMenuItem]) -> Bool {
@@ -732,6 +737,12 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     guard let historyHeaderItem = historyHeaderItem, let trailingSeparatorItem = trailingSeparatorItem else {
       return
     }
+    let badgedMenuItemsSupported = if #available(macOS 14, *) { true } else { false }
+    let promoteExtras = Cleepp.allowPurchases && UserDefaults.standard.promoteExtras && badgedMenuItemsSupported
+    if promoteExtras && promoteExtrasBadge == nil, #available(macOS 14, *) {
+      promoteExtrasBadge = NSMenuItemBadge(string: "LOCKED") // NSLocalizedString("promoteextras_menu_badge", comment: "")
+    }
+    
     let gotHistoryItems = !queue.isEmpty || (showsExpandedMenu && indexedItems.count > 0)
     let showSearchHeader = showsExpandedMenu && Cleepp.allowHistorySearch && !UserDefaults.standard.hideSearch
     
@@ -744,9 +755,23 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     queueAdvanceItem?.isVisibleAlternate = !queue.isEmpty
     
     // Bonus features to hide when not purchased
-    queuedPasteAllItem?.isVisible = Cleepp.allowPasteMultiple
-    queuedPasteMultipleItem?.isVisibleAlternate = Cleepp.allowPasteMultiple
-    undoCopyItem?.isVisible = Cleepp.allowUndoCopy
+    queuedPasteAllItem?.isVisible = Cleepp.allowPasteMultiple || promoteExtras
+    queuedPasteMultipleItem?.isVisibleAlternate = Cleepp.allowPasteMultiple || promoteExtras
+    if !Cleepp.allowPasteMultiple && promoteExtras, #available(macOS 14, *), let bedge = promoteExtrasBadge as? NSMenuItemBadge {
+      queuedPasteAllItem?.badge = bedge
+      queuedPasteMultipleItem?.badge = bedge
+      // important: if we add key equivalents to these items, must save those here
+      // and clear the shortcut when adding badge, like the undo item below
+    }
+    undoCopyItem?.isVisible = Cleepp.allowUndoCopy || promoteExtras
+    if !Cleepp.allowUndoCopy && promoteExtras, #available(macOS 14, *), let bedge = promoteExtrasBadge as? NSMenuItemBadge {
+      undoCopyItem?.badge = bedge
+      cacheUndoCopyItemShortcut = undoCopyItem?.keyEquivalent ?? ""
+      undoCopyItem?.keyEquivalent = ""
+    } else if (undoCopyItem?.keyEquivalent.isEmpty ?? false) && !cacheUndoCopyItemShortcut.isEmpty {
+      undoCopyItem?.keyEquivalent = cacheUndoCopyItemShortcut
+      cacheUndoCopyItemShortcut = ""
+    }
     
     // Delete item visibility
     deleteItem?.isVisible = !queue.isEmpty || showsExpandedMenu
