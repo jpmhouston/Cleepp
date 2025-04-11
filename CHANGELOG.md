@@ -1,5 +1,16 @@
 Batch Clipboard Changelog
 
+## version 1.0.1b10 (2025-04-10)
+
+- Added alternate menu item to start replaying the collected batch of clipboard items; beforehand the clipboard will always contain the most recently copied item, afterwards it contains the next in the batch to be pasted.
+- Made the new Start Replaying Itemd and Show Intro menu items accessible with the shift key modifier, with shift-clicking the status menu icon now opening the menu rathen than behaving just like control-clicking.
+- Simplified titles of some menu items to refer to Batch instead of Collecting / Replaying.
+- When starting batch explicitly rather than automatically with the shortcut, no longer stay in batch mode when all items are pasted.
+- Preview bonus menu items, visible but disabled and badged, visible by default in app store version for one week before they disappear. Checkboxes to control this added to the General section of the Settings window.
+- Updated the Intro window to reflect changed Start Batcgh menu items, minor edits.
+- Fixed issues with the close box of keyboard shortcut fields not working in the General panel of the Settings window. Upgrading this 3rd party library dependency required increasing the minimum OS supported from Mojave to Catalina.
+- Improved slightly the layout in the General panel of the Settings window. Admittedly there's still the issue of unnecessary vertical white space when first opening the Settings window, subsequently fixed when switching panels and then returing to General.
+
 ## version 1.0.1b9 (2025-03-12)
 
 - Added potential hotkey in the Setting window to start a batch, can use this to start and then copy or cut in your frontmost app as normal.
