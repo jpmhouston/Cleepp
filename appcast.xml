@@ -6,6 +6,23 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>1.0.1b11</title>
+            <pubDate>Fri, 18 Apr 2025 18:59:55 +0000</pubDate>
+            <link>https://github.com/jpmhouston/Cleepp/releases</link>
+            <sparkle:version>919</sparkle:version>
+            <sparkle:shortVersionString>1.0.1b11</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>11.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<ul>
+<li>Fixed alternate menu item mechanism not working for paste and new
+advance items, made it appear only when queue size &gt;= 2 because if
+size = 1 then advancing is same as using the existing Cancel menu
+item.</li>
+<li>Fixed minor error in github workflow for smoke builds.</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/jpmhouston/Cleepp/releases/download/v1.0.1b11/Batch.Clipboard.1.0.1b11.zip" length="6717938" type="application/octet-stream" sparkle:edSignature="xJwqSiirX6UXghBGJ1ggBpHqpPYN6M6gD2EIUFGuSVG29ahy6kS/9g5BzoK6AlSavqRgKeLwM52kJamMcaGuBg=="/>
+        </item>
+        <item>
             <title>1.0.1b10</title>
             <pubDate>Fri, 11 Apr 2025 00:15:27 +0000</pubDate>
             <link>https://github.com/jpmhouston/Cleepp/releases</link>
@@ -60,22 +77,6 @@ source.</li>
 </ul>
 ]]></description>
             <enclosure url="https://github.com/jpmhouston/Cleepp/releases/download/v1.0.1b9/Batch.Clipboard.1.0.1b9.zip" length="6182056" type="application/octet-stream" sparkle:edSignature="QJJs+mhAnHhcmkJnnPpg3pdPYtChGdiqmU1V1r5AkahMjvgLDbzi6PCUCmHrNztA5UiNzWj377PGZ7Iq7JYdAA=="/>
-        </item>
-        <item>
-            <title>1.0.1b8</title>
-            <pubDate>Sat, 11 Jan 2025 16:52:26 +0000</pubDate>
-            <link>https://github.com/jpmhouston/Cleepp/releases</link>
-            <sparkle:version>904</sparkle:version>
-            <sparkle:shortVersionString>1.0.1b8</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>11.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<ul>
-<li>Had to increase version number from 1.0 to 1.0.1 because reasons to
-do with the App Store, made it apply to non-AppStore build as well.</li>
-<li>Improved app icon.</li>
-<li>App Store build add encryption exempt key to its Info.plist.</li>
-</ul>
-]]></description>
-            <enclosure url="https://github.com/jpmhouston/Cleepp/releases/download/v1.0.1b8/Batch.Clipboard.1.0.1b8.zip" length="6178336" type="application/octet-stream" sparkle:edSignature="R3eC3a8ujeOPugO19CoN6N+G63ZykZMge8I7+GK2961IXt7iMWiXjmmIEzKuyfW15wZRaVqfzW0vDCeXtNkWAQ=="/>
         </item>
         <item>
             <title>1.0b1</title>
