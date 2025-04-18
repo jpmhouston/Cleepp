@@ -1,5 +1,10 @@
 Batch Clipboard Changelog
 
+## version 1.0.1b11 (2025-04-18 🐰)
+
+- Fixed alternate menu item mechanism not working for paste and new advance items, made it appear only when queue size >= 2 because if size = 1 then advancing is same as using the existing Cancel menu item.  
+- Fixed minor error in github workflow for smoke builds.
+
 ## version 1.0.1b10 (2025-04-10)
 
 - Added alternate menu item to start replaying the collected batch of clipboard items; beforehand the clipboard will always contain the most recently copied item, afterwards it contains the next in the batch to be pasted.
