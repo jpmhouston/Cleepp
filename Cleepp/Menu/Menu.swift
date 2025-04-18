@@ -78,6 +78,7 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     //if #unavailable(macOS 14) { true } else { false }
   }
   private var promoteExtrasBadge: NSObject?
+  private var dynamicItemVisibilityTimer: Timer?
   private var cacheUndoCopyItemShortcut = ""
   private var showsExpandedMenu = false
   private var showsFullExpansion = false
@@ -164,6 +165,7 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     rebuildItemsAsNeeded()
     updateShortcuts()
     updateItemVisibility()
+    startDynamicItemVisibility()
     updateDisabledMenuItems()
     addQueueItemsSeparator()
   }
@@ -183,6 +185,7 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     isVisible = false
     isFiltered = false
     showsExpandedMenu = false
+    stopDynamicItemVisibility()
     removeQueueItemsSeparator()
     
     previewController.menuDidClose()
@@ -752,7 +755,15 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     
     // Allow/prohibit alternate to queueStopItem & queuePasteItem
     queueReplayItem?.isVisibleAlternate = !queue.isEmpty && !queue.isReplaying
-    queueAdvanceItem?.isVisibleAlternate = !queue.isEmpty
+    // wanted this `queueAdvanceItem?.isVisibleAlternate = !queue.isEmpty` isAlternate mechanism
+    // found not the work for queuedPasteItem when it has the default key equivalent ctrl-cmd-v
+    if queue.size > 1 && NSEvent.modifierFlags.contains(.shift) { // initial visibility, later update dynamically
+      queuedPasteItem?.isVisible = false
+      queueAdvanceItem?.isVisible = true
+    } else {
+      queuedPasteItem?.isVisible = true
+      queueAdvanceItem?.isVisible = false
+    }
     
     // Bonus features to hide when not purchased
     queuedPasteAllItem?.isVisible = Cleepp.allowPasteMultiple || promoteExtras
@@ -812,6 +823,33 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     // Remaining history items hidden unless showing the expanded menu
     for index in remainingHistoryMenuItemIndex  ..< endHistoryMenuItemIndex {
       makeVisible(showsExpandedMenu, historyMenuItemAt: index)
+    }
+  }
+  
+  private func startDynamicItemVisibility() {
+    let timer = Timer(timeInterval: 0.1, repeats: true) { [weak self] _ in
+      self?.updateDynamicVisibility()
+    }
+    RunLoop.main.add(timer, forMode: RunLoop.Mode.eventTracking)
+    dynamicItemVisibilityTimer = timer
+  }
+  
+  private func stopDynamicItemVisibility() {
+    dynamicItemVisibilityTimer?.invalidate()
+    dynamicItemVisibilityTimer = nil
+  }
+  
+  private func updateDynamicVisibility() {
+    // manual mechanism for menu item alternates, for cases the isAlternate flag doesn't work
+    // currently only used for queuedPasteItem / queueAdvanceItem
+    if queue.size > 1 {
+      if NSEvent.modifierFlags.contains(.shift) {
+        queuedPasteItem?.isVisible = false
+        queueAdvanceItem?.isVisible = true
+      } else {
+        queuedPasteItem?.isVisible = true
+        queueAdvanceItem?.isVisible = false
+      }
     }
   }
   

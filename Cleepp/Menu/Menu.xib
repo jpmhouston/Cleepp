@@ -70,7 +70,7 @@
                         <action selector="cancelQueueMode:" target="-2" id="sql-E4-fEM"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Start Replaying Items" hidden="YES" id="xpH-S9-QDS">
+                <menuItem title="Start Replaying Items" hidden="YES" alternate="YES" id="xpH-S9-QDS">
                     <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                     <connections>
                         <action selector="startReplay:" target="-2" id="meN-9w-5Wi"/>
@@ -199,7 +199,7 @@ CA
             <rect key="frame" x="0.0" y="0.0" width="296" height="32"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uIb-jp-yTA">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uIb-jp-yTA">
                     <rect key="frame" x="11" y="2" width="283" height="28"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" id="2lz-8v-x0K">
                         <font key="font" metaFont="smallSystem"/>
