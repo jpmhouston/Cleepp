@@ -13,7 +13,6 @@ on:
       - "*.toml"
       - "*.xml"
   workflow_dispatch:
-    branches: [forkmain]
 
 env:
   projectfile: Maccy.xcodeproj
