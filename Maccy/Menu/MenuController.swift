@@ -42,7 +42,7 @@ class MenuController {
   }
 
   @objc
-  private func performStatusItemClick(_ modifierFlags: NSEvent.ModifierFlags) {
+  private func performStatusItemClick(_ modifierFlags: NSEvent.ModifierFlags, _ isRightClick: Bool) {
     #if CLEEPP
     #if DEBUG
     if AppDelegate.shouldFakeAppInteraction && modifierFlags.contains(.capsLock) {
@@ -62,6 +62,10 @@ class MenuController {
       }
       
       if !modifierFlags.contains(.option) && modifierFlags.contains(.control) {
+        menu.performQueueModeToggle()
+        return
+      }
+      if isRightClick && modifierFlags.isEmpty {
         menu.performQueueModeToggle()
         return
       }
