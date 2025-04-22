@@ -1,5 +1,11 @@
 Batch Clipboard Changelog
 
+## version 1.0.1b12 (2025-04-21 🥚)
+
+- Expose Start Replaying and Advance (without pasting) menu items without holding shift key, made Start Replaying take place of Start Batch, separate out Cancel item.
+- Fixed Advance menu item wasn't starting batch replay.
+- Made non-appstore build action log the SHA256 hash of the zip file, needed for the homebrew cask file.
+
 ## version 1.0.1b11 (2025-04-18 🐰)
 
 - Fixed alternate menu item mechanism not working for paste and new advance items, made it appear only when queue size >= 2 because if size = 1 then advancing is same as using the existing Cancel menu item.  
