@@ -223,14 +223,13 @@ extension Cleepp {
       return false
     }
     
-    Self.busy = true
-    
     do {
       try queue.replaying()
     } catch {
-      Self.busy = false
       return false
     }
+    
+    Self.busy = true
     
     let decrementQueueDelay = extraDelayOnQueuedPaste ? extraPasteDelay : standardPasteDelay
     
@@ -411,6 +410,12 @@ extension Cleepp {
     }
     
     guard !queue.isEmpty else {
+      return
+    }
+    
+    do {
+      try queue.replaying()
+    } catch {
       return
     }
     

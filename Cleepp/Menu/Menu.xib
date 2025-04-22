@@ -64,16 +64,16 @@
                         <action selector="startQueueMode:" target="-2" id="MbC-Ui-kST"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Cancel Batch" tag="102" hidden="YES" id="TKZ-UP-Ggw">
+                <menuItem title="Start Replaying Items" hidden="YES" id="xpH-S9-QDS">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="startReplay:" target="-2" id="meN-9w-5Wi"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Cancel Batch" tag="102" enabled="NO" id="TKZ-UP-Ggw">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="cancelQueueMode:" target="-2" id="sql-E4-fEM"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Start Replaying Items" hidden="YES" alternate="YES" id="xpH-S9-QDS">
-                    <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
-                    <connections>
-                        <action selector="startReplay:" target="-2" id="meN-9w-5Wi"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="1dD-HH-ufE"/>
