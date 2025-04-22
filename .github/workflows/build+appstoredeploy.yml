@@ -1,3 +1,4 @@
+# Copyright © 2025 Pierre Houston, Bananameter Labs. All rights reserved 
 name: Build Mac App Store Release
 
 on:
