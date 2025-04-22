@@ -487,9 +487,12 @@ jobs:
         id: sha256
         run: |
           :
-          hash=${shasum -a 256 "${{ steps.zip.outputs.file }}" | cut -d " " -f 1}
-          echo "::notice::SHA256 hash of \"${{ steps.zip.outputs.name }}\" is $hash"
-          echo "hash=$hash" >> $GITHUB_OUTPUT # might use in future step that updates the homebrew cask
+          hashout=$(shasum -a 256 "${{ steps.zip.outputs.file }}")
+          echo "::notice::SHA256 hash: $hashout"
+          # this not working, is shasum output different on this system?
+          #hash=${shasum -a 256 "${{ steps.zip.outputs.file }}" | cut -d " " -f 1}
+          #echo "::notice::SHA256 hash of \"${{ steps.zip.outputs.name }}\" is $hash"
+          #echo "hash=$hash" >> $GITHUB_OUTPUT # might use in future step that updates the homebrew cask
       
       - name: Disk Image
         id: dmg
