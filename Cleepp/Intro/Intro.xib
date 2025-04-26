@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -252,10 +253,10 @@ DQ
                             </textFieldCell>
                         </textField>
                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalCompressionResistancePriority="600" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EDA-eq-AfB">
-                            <rect key="frame" x="268" y="47" width="300" height="231"/>
+                            <rect key="frame" x="268" y="43" width="300" height="239"/>
                             <subviews>
                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BCE-cs-oZY">
-                                    <rect key="frame" x="-2" y="174" width="304" height="57"/>
+                                    <rect key="frame" x="-2" y="182" width="304" height="57"/>
                                     <textFieldCell key="cell" title="Batch Clipboard needs your authorization to be able to instruct the frontmost application to perform a Copy or Paste." id="VI8-q1-aOr">
                                         <font key="font" metaFont="system" size="16"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -263,7 +264,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EvF-0r-9Z1">
-                                    <rect key="frame" x="-2" y="120" width="304" height="38"/>
+                                    <rect key="frame" x="-2" y="128" width="304" height="38"/>
                                     <textFieldCell key="cell" title="This authorization has not yet been granted." id="lhN-0D-29x">
                                         <font key="font" metaFont="system" size="16"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -271,7 +272,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="DkE-IU-Osz">
-                                    <rect key="frame" x="-2" y="158" width="233" height="38"/>
+                                    <rect key="frame" x="-2" y="166" width="233" height="38"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" title="This authorization has already been granted." id="Jti-hB-gYF">
                                         <font key="font" metaFont="system" size="16"/>
@@ -280,11 +281,11 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nCR-Wr-cCe">
-                                    <rect key="frame" x="0.0" y="84" width="252" height="20"/>
+                                    <rect key="frame" x="0.0" y="84" width="252" height="28"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2VO-Pm-i8d">
-                                            <rect key="frame" x="-7" y="-7" width="242" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Open Privacy &amp; Security Panel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="J3i-c2-9gG">
+                                            <rect key="frame" x="-6" y="-6" width="240" height="40"/>
+                                            <buttonCell key="cell" type="push" title="Open Privacy &amp; Security Panel" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="J3i-c2-9gG">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system" size="15"/>
                                             </buttonCell>
@@ -293,7 +294,7 @@ DQ
                                             </connections>
                                         </button>
                                         <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="w2D-dO-d7T">
-                                            <rect key="frame" x="236" y="2" width="16" height="16"/>
+                                            <rect key="frame" x="236" y="6" width="16" height="16"/>
                                         </progressIndicator>
                                     </subviews>
                                     <visibilityPriorities>
@@ -355,34 +356,34 @@ DQ
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="introSettingsPanel" id="eFq-ol-dLN"/>
                         </imageView>
                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalCompressionResistancePriority="600" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NbK-HR-eEY">
-                            <rect key="frame" x="364" y="38" width="210" height="254"/>
+                            <rect key="frame" x="364" y="32" width="210" height="260"/>
                             <subviews>
-                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="avZ-Lx-MdF">
-                                    <rect key="frame" x="-2" y="203" width="214" height="51"/>
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="avZ-Lx-MdF">
+                                    <rect key="frame" x="-2" y="211" width="214" height="49"/>
                                     <textFieldCell key="cell" title="The Accessibility subpanel of your Mac's Privacy &amp; Security settings should have opened." id="gdT-wb-YBu">
                                         <font key="font" metaFont="system" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KHW-LV-WPV">
-                                    <rect key="frame" x="-2" y="163" width="214" height="28"/>
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KHW-LV-WPV">
+                                    <rect key="frame" x="-2" y="171" width="214" height="28"/>
                                     <textFieldCell key="cell" title="Unlock using the lock icon at the bottom if you have that." id="qlp-HD-HkR">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GKA-E6-jD4">
-                                    <rect key="frame" x="-2" y="100" width="214" height="51"/>
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKA-E6-jD4">
+                                    <rect key="frame" x="-2" y="108" width="214" height="51"/>
                                     <textFieldCell key="cell" title="If Batch Clipboard is in the list and off, turn it on. Verify all is setup with the button below." id="Ahq-i4-uGv">
                                         <font key="font" metaFont="system" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WEY-X6-Vmb">
-                                    <rect key="frame" x="-2" y="32" width="214" height="56"/>
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WEY-X6-Vmb">
+                                    <rect key="frame" x="-2" y="40" width="214" height="56"/>
                                     <textFieldCell key="cell" id="uNZ-xu-9dB">
                                         <font key="font" metaFont="smallSystem"/>
                                         <string key="title">If the check fails, use the – button to remove that row if it exists then the + button and choose Batch Clipboard from your Applications folder.</string>
@@ -390,12 +391,12 @@ DQ
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRU-32-pOq">
-                                    <rect key="frame" x="0.0" y="0.0" width="64" height="20"/>
+                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRU-32-pOq">
+                                    <rect key="frame" x="0.0" y="0.0" width="134" height="28"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UAU-vW-BHg">
-                                            <rect key="frame" x="-7" y="-7" width="78" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tAd-cr-Mmq">
+                                            <rect key="frame" x="-6" y="-6" width="76" height="40"/>
+                                            <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tAd-cr-Mmq">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system" size="15"/>
                                             </buttonCell>
@@ -403,18 +404,18 @@ DQ
                                                 <action selector="checkAccessibilityAuthorization:" target="o5X-kK-gzk" id="dsI-nd-dJb"/>
                                             </connections>
                                         </button>
-                                        <textField hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vGq-Jf-faS">
-                                            <rect key="frame" x="-2" y="1" width="27" height="19"/>
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vGq-Jf-faS">
+                                            <rect key="frame" x="70" y="0.0" width="31" height="28"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="✅" id="oz9-Dx-jW0">
-                                                <font key="font" metaFont="system" size="16"/>
+                                                <font key="font" metaFont="system" size="24"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4k3-Do-TDL">
-                                            <rect key="frame" x="-2" y="1" width="27" height="19"/>
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4k3-Do-TDL">
+                                            <rect key="frame" x="105" y="0.0" width="31" height="28"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="❌" id="ddF-JC-E3k">
-                                                <font key="font" metaFont="system" size="16"/>
+                                                <font key="font" metaFont="system" size="24"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
