@@ -210,7 +210,7 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
     }
     if UserDefaults.standard.promoteExtras && UserDefaults.standard.promoteExtrasExpires {
       cleepp.resetPromoteExtrasExpirationTimer(on: true)
-    } else if !UserDefaults.standard.promoteExtras || !UserDefaults.standard.promoteExtrasExpires{
+    } else if !UserDefaults.standard.promoteExtras || !UserDefaults.standard.promoteExtrasExpires {
       cleepp.resetPromoteExtrasExpirationTimer(on: false)
     }
   }
