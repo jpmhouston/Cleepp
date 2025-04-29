@@ -1,5 +1,10 @@
 Batch Clipboard Changelog
 
+## version 1.0.1b13 (2025-04-28 🇨🇦)
+
+- Increased size of button on page 2 of the intro that opens the authentication page in the Settings app, the Check button on page 3.
+- Fixed how expiration date is calculated for previewing appstore build's bonus menu items, made cycling the checkbox not reset the date to another week out. Only the lower checkbox about turning off previews in a week, turning that off and on will reset the week.
+
 ## version 1.0.1b12 (2025-04-21 🥚)
 
 - Expose Start Replaying and Advance (without pasting) menu items without holding shift key, made Start Replaying take place of Start Batch, separate out Cancel item.
