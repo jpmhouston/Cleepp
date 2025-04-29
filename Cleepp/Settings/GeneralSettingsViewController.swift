@@ -208,17 +208,15 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
     guard let cleepp = (NSApp.delegate as? AppDelegate)?.maccy else {
       return
     }
-    if UserDefaults.standard.promoteExtras && UserDefaults.standard.promoteExtrasExpires {
-      cleepp.resetPromoteExtrasExpirationTimer(on: true)
-    } else if !UserDefaults.standard.promoteExtras || !UserDefaults.standard.promoteExtrasExpires {
-      cleepp.resetPromoteExtrasExpirationTimer(on: false)
-    }
+    cleepp.setPromoteExtrasExpirationTimer(on: UserDefaults.standard.promoteExtras && UserDefaults.standard.promoteExtrasExpires)
   }
   #endif
   
   @IBAction func promoteExtrasChanged(_ sender: NSButton) {
     #if FOR_APP_STORE
     UserDefaults.standard.promoteExtras = (sender.state == .on)
+    // turning promotion itself off & on doesn't reset the expiration date
+    // but keeps the same expiration as long as its still in the future
     updatePromoteExtrasExpirationOption()
     updatePromoteExtrasExpirationTimer()
     #endif
@@ -227,6 +225,8 @@ class GeneralSettingsViewController: NSViewController, SettingsPane {
   @IBAction func promoteExtrasExpiresChanged(_ sender: NSButton) {
     #if FOR_APP_STORE
     UserDefaults.standard.promoteExtrasExpires = (sender.state == .on)
+    // turning expiration checkbox off and on does reset the expiration date
+    UserDefaults.standard.promoteExtrasExpiration = nil
     updatePromoteExtrasExpirationTimer()
     #endif
   }

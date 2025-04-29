@@ -320,22 +320,21 @@ class Maccy: NSObject {
       userDefaults.promoteExtras = true
       userDefaults.promoteExtrasExpires = true
       
-      if let expiration = promoteExtrasExpirationDate() {
-        setPromoteExtrasExpirationTimer(expiration)
+      if let expiration = promoteExtrasExpirationDate(), let date = expiration.date {
+        setPromoteExtrasExpirationTimer(to: date)
         userDefaults.promoteExtrasExpiration = expiration
-      }
-      else {
-        // cannot set timer, don't promote the bonus features after all
+      } else {
+        // cannot set the timer, don't promote the bonus features after all
         userDefaults.promoteExtras = false
       }
     }
     else if userDefaults.promoteExtras && userDefaults.promoteExtrasExpires {
-      if let expiration = userDefaults.promoteExtrasExpiration, let date = expiration.date,
-         date.timeIntervalSinceNow > 0 // ie. date is in the future
+      if let restoredExpiration = userDefaults.promoteExtrasExpiration,
+         let restoredDate = restoredExpiration.date, restoredDate.timeIntervalSinceNow > 0 // ie. date is in the future
       {
-        setPromoteExtrasExpirationTimer(expiration)
+        setPromoteExtrasExpirationTimer(to: restoredDate)
       } else {
-        // already passed expiration, cancel promoting the bonus features
+        // already passed the expiration, cancel promoting the bonus features
         userDefaults.promoteExtras = false
       }
     }
@@ -343,25 +342,31 @@ class Maccy: NSObject {
   }
   
   #if FOR_APP_STORE
-  func resetPromoteExtrasExpirationTimer(on: Bool) {
+  func setPromoteExtrasExpirationTimer(on: Bool) {
     if on {
-      if let expiration = promoteExtrasExpirationDate() {
-        setPromoteExtrasExpirationTimer(expiration)
-        UserDefaults.standard.promoteExtrasExpiration = expiration
+      // first try re-using an existing expiration date, only picking a
+      // new date if the existing one is in the past
+      if let reusedExpiration = UserDefaults.standard.promoteExtrasExpiration,
+         let reusedDate = reusedExpiration.date, reusedDate.timeIntervalSinceNow > 0 {// ie. date is in the future
+        setPromoteExtrasExpirationTimer(to: reusedDate)
       }
+      else if let newExpiration = promoteExtrasExpirationDate(), let date = newExpiration.date {
+        setPromoteExtrasExpirationTimer(to: date)
+        UserDefaults.standard.promoteExtrasExpiration = newExpiration
+      }
+      // otherwise failed to pick a date to set the timer with, expiration won't occur
     } else {
       clearPromoteExtrasExpirationTimer()
-      UserDefaults.standard.promoteExtrasExpiration = nil
     }
   }
   
-  private func setPromoteExtrasExpirationTimer(_ dateComponents: DateComponents) {
-    guard let date = dateComponents.date, date.timeIntervalSinceNow > 0 else {
-      // can't set timer to this date, just do expiration now
-      UserDefaults.standard.promoteExtras = false
+  private func setPromoteExtrasExpirationTimer(to date: Date) {
+    guard date.timeIntervalSinceNow > 0 else { // ie. date is in the future
+      // can't set the timer to this date, expiration won't occur
       return
     }
-    nop() // to allow logging breakpoint here
+    // useful, tricky breakpoint here: setting exipiry timer to @LocalShortDateFormatter().string(from:date)@
+    
     promotionExpirationTimer = Timer.scheduledTimer(withTimeInterval: date.timeIntervalSinceNow, repeats: false) { [weak self] _ in
       self?.promotionExpirationTimer = nil
       UserDefaults.standard.promoteExtras = false
@@ -379,15 +384,16 @@ class Maccy: NSObject {
   private func promoteExtrasExpirationDate() -> DateComponents? {
     let calendar = Calendar(identifier: .gregorian)
     #if DEBUG
-    guard let minuteFromNow = calendar.date(byAdding: .minute, value: 1, to: Date(), wrappingComponents: true) else {
+    guard let minuteFromNow = calendar.date(byAdding: .minute, value: 1, to: Date()) else {
       return nil
     }
     return calendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar], from: minuteFromNow)
     #else
-    guard let nextWeek = calendar.date(byAdding: .day, value: 7, to: Date(), wrappingComponents: true) else {
+    guard let nextWeek = calendar.date(byAdding: .day, value: 7, to: Date()) else {
       return nil
     }
-    return calendar.dateComponents([.year, .month, .day, .calendar], from: nextWeek)
+    let midnightNextWeek = calendar.startOfDay(for: nextWeek)
+    return calendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar], from: midnightNextWeek)
     #endif
   }
   
