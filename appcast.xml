@@ -6,6 +6,25 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>1.0.1b13</title>
+            <pubDate>Tue, 29 Apr 2025 12:47:40 +0000</pubDate>
+            <link>https://github.com/jpmhouston/Cleepp/releases</link>
+            <sparkle:version>931</sparkle:version>
+            <sparkle:shortVersionString>1.0.1b13</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
+            <description><![CDATA[<ul>
+<li>Increased size of button on page 2 of the intro that opens the
+authentication page in the Settings app, the Check button on page
+3.</li>
+<li>Fixed how expiration date is calculated for previewing appstore
+build’s bonus menu items, made cycling the checkbox not reset the date
+to another week out. Only the lower checkbox about turning off previews
+in a week, turning that off and on will reset the week.</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/jpmhouston/Cleepp/releases/download/v1.0.1b13/Batch.Clipboard.1.0.1b13.zip" length="6733180" type="application/octet-stream" sparkle:edSignature="PEwp/PadcbuN400KAjX3YrgF9sflHYC+sxnKatXz2WAUtHF1ULCfzi0RGgyoYnesVy30ap3TKvnuT+yHhCHeCw=="/>
+        </item>
+        <item>
             <title>1.0.1b12</title>
             <pubDate>Tue, 22 Apr 2025 01:43:50 +0000</pubDate>
             <link>https://github.com/jpmhouston/Cleepp/releases</link>
