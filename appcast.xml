@@ -6,6 +6,23 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>1.0.1</title>
+            <pubDate>Fri, 02 May 2025 05:32:16 +0000</pubDate>
+            <link>https://github.com/jpmhouston/Cleepp/releases</link>
+            <sparkle:version>935</sparkle:version>
+            <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
+            <description><![CDATA[<ul>
+<li>Made menus use titlecase more consistently (lowercase “to”, “with”),
+in sync with most recent documentation.</li>
+<li>Made the github CI scripts log the build number used as the “bundle
+version” value in the app’s Info.plist, also visible in the Batch
+Clipboard about box.</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/jpmhouston/Cleepp/releases/download/v1.0.1/Batch.Clipboard.1.0.1.zip" length="6733209" type="application/octet-stream" sparkle:edSignature="QVPTC17JieakLm8kaYI1ry5HphmDYrEEyV3HSlvyyadEAbxo5NY6LXByHbk1+1ivRlueJk9RdD+XTCJai4E1Cg=="/>
+        </item>
+        <item>
             <title>1.0.1b13</title>
             <pubDate>Tue, 29 Apr 2025 12:47:40 +0000</pubDate>
             <link>https://github.com/jpmhouston/Cleepp/releases</link>
