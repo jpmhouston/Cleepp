@@ -1,5 +1,10 @@
 Batch Clipboard Changelog
 
+## version 1.0.1 (2025-05-01)
+
+- Made menus use titlecase more consistently (lowercase "to", "with"), in sync with most recent documentation.
+- Made the github CI scripts log the build number used as the "bundle version" value in the app's Info.plist, also visible in the Batch Clipboard about box.
+
 ## version 1.0.1b13 (2025-04-28 🇨🇦)
 
 - Increased size of button on page 2 of the intro that opens the authentication page in the Settings app, the Check button on page 3.
