@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -77,13 +78,13 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="1dD-HH-ufE"/>
-                <menuItem title="Copy To Batch" tag="103" id="ieX-in-c9O">
+                <menuItem title="Copy to Batch" tag="103" id="ieX-in-c9O">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="queuedCopy:" target="-2" id="VYn-hd-kO6"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Paste From Batch &amp; Advance" tag="104" id="WZ5-r7-f8t">
+                <menuItem title="Paste from Batch &amp; Advance" tag="104" id="WZ5-r7-f8t">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="queuedPaste:" target="-2" id="Dd4-CN-zGU"/>
