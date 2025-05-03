@@ -4,6 +4,7 @@ Batch Clipboard Changelog
 
 - Made menus use titlecase more consistently (lowercase "to", "with"), in sync with most recent documentation.
 - Made the github CI scripts log the build number used as the "bundle version" value in the app's Info.plist, also visible in the Batch Clipboard about box.
+- Updated the readme file included in the non-appstore disk image.
 
 ## version 1.0.1b13 (2025-04-28 🇨🇦)
 
