@@ -109,12 +109,14 @@ class Purchases: NSObject {
   func start() {
     setupStoreKit()
     
+    #if !IGNORE_RECEIPT_ON_LAUNCH
     switch checkLocalReceipt() {
     case .success(let items):
       callObservers(withUpdate: .success(.purchases(items)))
     case .failure(let err):
       callObservers(withUpdate: .failure(err))
     }
+    #endif
   }
   
   func finish(andRemoveObserver token: ObservationToken? = nil) {

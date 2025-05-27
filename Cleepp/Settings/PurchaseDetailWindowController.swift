@@ -168,7 +168,7 @@ class PurchaseDetailWindowController: NSWindowController, NSWindowDelegate, NSTa
 extension PurchaseDetailCellView {
   func showHighlightRing(_ show: Bool) {
     if show {
-      innerView.layer?.borderColor = NSColor.white.cgColor
+      innerView.layer?.borderColor = NSColor.gray.cgColor
       innerView.layer?.borderWidth = 2.0
       innerView.layer?.cornerRadius = 4.0
     } else {
