@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -151,7 +152,7 @@
                         </gridCell>
                         <gridCell row="9S5-KO-hlC" column="vOJ-9h-G8Y" headOfMergedCell="ngL-2y-bq4" id="ngL-2y-bq4">
                             <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jni-KE-nIm">
-                                <rect key="frame" x="332" y="350" width="100" height="0.0"/>
+                                <rect key="frame" x="332" y="258" width="100" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="H75-ZQ-Yck"/>
                                 </constraints>
@@ -160,13 +161,13 @@
                         <gridCell row="9S5-KO-hlC" column="pQU-Pz-q1v" headOfMergedCell="ngL-2y-bq4" id="RGn-4L-Ntz"/>
                         <gridCell row="mzz-6k-Dz9" column="vOJ-9h-G8Y" headOfMergedCell="hec-ch-tJx" xPlacement="fill" yPlacement="center" id="hec-ch-tJx">
                             <box key="contentView" verticalHuggingPriority="700" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Mfq-pZ-sSn">
-                                <rect key="frame" x="0.0" y="339" width="432" height="5"/>
+                                <rect key="frame" x="0.0" y="247" width="432" height="5"/>
                             </box>
                         </gridCell>
                         <gridCell row="mzz-6k-Dz9" column="pQU-Pz-q1v" headOfMergedCell="hec-ch-tJx" id="hE2-yX-ng0"/>
                         <gridCell row="prs-SG-Pfl" column="vOJ-9h-G8Y" headOfMergedCell="mkT-Id-xVf" id="mkT-Id-xVf">
                             <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9dz-rj-Rjl">
-                                <rect key="frame" x="332" y="333" width="100" height="0.0"/>
+                                <rect key="frame" x="332" y="241" width="100" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="yuB-eR-Rbd"/>
                                 </constraints>
@@ -175,7 +176,7 @@
                         <gridCell row="prs-SG-Pfl" column="pQU-Pz-q1v" headOfMergedCell="mkT-Id-xVf" id="ekT-NX-dtt"/>
                         <gridCell row="tKf-uu-raQ" column="vOJ-9h-G8Y" id="gaG-xV-jaJ">
                             <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1Q-kI-egx">
-                                <rect key="frame" x="45" y="292" width="76" height="23"/>
+                                <rect key="frame" x="45" y="200" width="76" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="ccs-88-5v0"/>
                                 </constraints>
@@ -188,17 +189,17 @@
                         </gridCell>
                         <gridCell row="tKf-uu-raQ" column="pQU-Pz-q1v" id="JTS-jd-trE">
                             <customView key="contentView" identifier="startkeyview" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wkA-3I-kqY">
-                                <rect key="frame" x="132" y="295" width="120" height="30"/>
+                                <rect key="frame" x="132" y="203" width="180" height="30"/>
                                 <string key="toolTip">Global shortcut key to start a new clipboard item batch.
 Default: none.</string>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="j2p-Ny-ogZ"/>
+                                    <constraint firstAttribute="width" constant="180" id="j2p-Ny-ogZ"/>
                                 </constraints>
                             </customView>
                         </gridCell>
                         <gridCell row="1lh-Qw-cAx" column="vOJ-9h-G8Y" id="2m8-9a-mJO">
                             <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C8J-Mx-Lzz">
-                                <rect key="frame" x="43" y="251" width="78" height="23"/>
+                                <rect key="frame" x="43" y="159" width="78" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="10R-0q-RDn"/>
                                 </constraints>
@@ -211,17 +212,17 @@ Default: none.</string>
                         </gridCell>
                         <gridCell row="1lh-Qw-cAx" column="pQU-Pz-q1v" id="t3H-4Z-90w">
                             <customView key="contentView" identifier="copykeyview" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gv6-rV-zkI">
-                                <rect key="frame" x="132" y="254" width="120" height="30"/>
+                                <rect key="frame" x="132" y="162" width="180" height="30"/>
                                 <string key="toolTip">Global shortcut key to copy into the batch queue, starting new batch if one not yet started.
 Default: ^⌘C.</string>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="Ntm-y4-aXK"/>
+                                    <constraint firstAttribute="width" constant="180" id="Ntm-y4-aXK"/>
                                 </constraints>
                             </customView>
                         </gridCell>
                         <gridCell row="rSH-D5-fQU" column="vOJ-9h-G8Y" id="MkQ-Ti-RAy">
                             <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UNS-12-xWP">
-                                <rect key="frame" x="41" y="210" width="80" height="23"/>
+                                <rect key="frame" x="41" y="118" width="80" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="ARz-S4-0pY"/>
                                 </constraints>
@@ -234,17 +235,17 @@ Default: ^⌘C.</string>
                         </gridCell>
                         <gridCell row="rSH-D5-fQU" column="pQU-Pz-q1v" id="yVM-gZ-e0i">
                             <customView key="contentView" identifier="pastekeyview" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pPs-rF-k8m">
-                                <rect key="frame" x="132" y="213" width="120" height="30"/>
+                                <rect key="frame" x="132" y="121" width="180" height="30"/>
                                 <string key="toolTip">Global shortcut key to paste next item from the batch queue.
 Default: ^⌘P.</string>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="Nux-kj-G8Q"/>
+                                    <constraint firstAttribute="width" constant="180" id="Nux-kj-G8Q"/>
                                 </constraints>
                             </customView>
                         </gridCell>
                         <gridCell row="fCE-Og-dJB" column="vOJ-9h-G8Y" headOfMergedCell="rT5-pf-281" id="rT5-pf-281">
                             <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RDM-BI-fNa">
-                                <rect key="frame" x="332" y="198" width="100" height="4"/>
+                                <rect key="frame" x="332" y="106" width="100" height="4"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="blX-8n-5jL"/>
                                 </constraints>
@@ -253,7 +254,7 @@ Default: ^⌘P.</string>
                         <gridCell row="fCE-Og-dJB" column="pQU-Pz-q1v" headOfMergedCell="rT5-pf-281" id="8ob-ud-v6j"/>
                         <gridCell row="gQG-qR-qof" column="vOJ-9h-G8Y" headOfMergedCell="8Tc-ki-XIw" xPlacement="fill" id="8Tc-ki-XIw">
                             <box key="contentView" verticalHuggingPriority="700" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="fMY-lL-A9Q">
-                                <rect key="frame" x="0.0" y="187" width="432" height="5"/>
+                                <rect key="frame" x="0.0" y="95" width="432" height="5"/>
                             </box>
                         </gridCell>
                         <gridCell row="gQG-qR-qof" column="pQU-Pz-q1v" headOfMergedCell="8Tc-ki-XIw" id="a3u-rN-xNI"/>
