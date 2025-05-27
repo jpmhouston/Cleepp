@@ -27,7 +27,9 @@ extension Cleepp {
     
     button.image = NSImage(named: .cleepMenuIcon)
     button.imagePosition = .imageRight
-    (button.cell as? NSButtonCell)?.highlightsBy = []
+    if #unavailable(macOS 11) {
+      (button.cell as? NSButtonCell)?.highlightsBy = []
+    }
   }
   
   func setStatusMenuIcon(to name: NSImage.Name) {
