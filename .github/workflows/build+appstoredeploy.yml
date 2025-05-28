@@ -150,7 +150,7 @@ jobs:
           # parse version to set these
           bareversion=$(echo $version | sed -r 's/([0-9](\.[0-9]){1,2}).*/\1/')
           versionsuffix=$(echo $version | sed -r 's/[0-9\.]+(.*)/\1/')
-          if [ -n "$versionsuffix" ]; then
+          if [ -n "$versionsuffix" ] ; then
             echo "- App version will be patched to be \"$bareversion\" (omitting \"$versionsuffix\")"
           fi
           
@@ -195,7 +195,7 @@ jobs:
           buildlogfile=xcodebuild-out.txt
           echo "log=$buildlogfile" >> $GITHUB_OUTPUT
           
-          if [ -n steps.version.outputs.bareversion ]; then
+          if [ -n "${{ steps.version.outputs.bareversion }}" ] ; then
             versionoverride="MARKETING_VERSION=${{ steps.version.outputs.bareversion }}"
           else
             echo "::warning::Parsed version string omitting suffix (a1,b5,..) not found"
@@ -212,7 +212,7 @@ jobs:
             -project "${{ env.projectfile }}" $versionoverride -derivedDataPath . | \
             tee "$buildlogfile" | xcbeautify --renderer github-actions
           
-          if [[ ! -d "${{ env.builddir }}/${{ env.bundlename }}" ]]; then
+          if [[ ! -d "${{ env.builddir }}/${{ env.bundlename }}" ]] ; then
             echo "::error::Unable to find the built app bundle"
             exit 1
           fi
@@ -225,7 +225,13 @@ jobs:
           if [[ -z $bundleVersion ]] ; then
             echo "::warning::Unable to find the app's bundle version"
           fi
-
+          
+          if [ -n "${{ steps.version.outputs.bareversion }}" ] ; then
+            echo "::notice::Built ${{ steps.version.outputs.releasename }} version ${{ steps.version.outputs.version }} as ${{ steps.version.outputs.bareversion }}, build number $bundleVersion"
+          else
+            echo "::notice::Built ${{ steps.version.outputs.releasename }} version ${{ steps.version.outputs.version }}, build number $bundleVersion"
+          fi
+          
           echo "version=$bundleVersion" >> $GITHUB_OUTPUT
           echo "appbundle=${{ env.builddir }}/${{ env.bundlename }}" >> $GITHUB_OUTPUT
       
@@ -409,7 +415,7 @@ jobs:
             thisversion=''
             prevversion=''
             while read line || [[ -n $line ]] ; do
-              if [[ -z $thisversion ]]; then
+              if [[ -z $thisversion ]] ; then
                 thisversion=$(echo $line | sed -n -E 's/^#+ version ([0-9.dabrc]+) .*$/\1/p')
                 if [[ -n $thisversion ]] ; then
                   if [[ $thisversion != "${{ steps.version.outputs.version }}" ]] ; then

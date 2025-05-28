@@ -202,7 +202,7 @@ jobs:
             -project "${{ env.projectfile }}" -derivedDataPath . | \
             tee "$buildlogfile" | xcbeautify --renderer github-actions
           
-          if [[ ! -d "${{ env.builddir }}/${{ env.bundlename }}" ]]; then
+          if [[ ! -d "${{ env.builddir }}/${{ env.bundlename }}" ]] ; then
             echo "::error::Unable to find the built app bundle"
             exit 1
           fi
@@ -218,6 +218,8 @@ jobs:
           elif [[ -z $bundleVersion ]] ; then
             echo "::warning::Unable to find the app's bundle version, workflows updating Sparkle appcast require this, but this one can continue"
           fi
+          
+          echo "::notice::Built ${{ steps.version.outputs.releasename }} version ${{ steps.version.outputs.version }}, build number $bundleVersion"
           
           echo "version=$bundleVersion" >> $GITHUB_OUTPUT
           echo "appbundle=${{ env.builddir }}/${{ env.bundlename }}" >> $GITHUB_OUTPUT
@@ -425,7 +427,7 @@ jobs:
             thisversion=''
             prevversion=''
             while read line || [[ -n $line ]] ; do
-              if [[ -z $thisversion ]]; then
+              if [[ -z $thisversion ]] ; then
                 thisversion=$(echo $line | sed -n -E 's/^#+ version ([0-9.dabrc]+) .*$/\1/p')
                 if [[ -n $thisversion ]] ; then
                   if [[ $thisversion != "${{ steps.version.outputs.version }}" ]] ; then
