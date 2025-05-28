@@ -519,7 +519,7 @@ extension Cleepp {
   }
   
   func fixQueueAfterDeletingItem(atIndex index: Int) {
-    if queue.isOn {
+    if queue.isOn, let headIndex = queue.headIndex, index <= headIndex {
       do {
         try queue.remove(atIndex: index)
       } catch {
