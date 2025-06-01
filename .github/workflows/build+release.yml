@@ -190,7 +190,6 @@ jobs:
         run: |
           :
           buildlogfile=xcodebuild-out.txt
-          echo "log=$buildlogfile" >> $GITHUB_OUTPUT
           
           echo "- Build with xcodebuild from $(xcodebuild -version)"
           # requires that env.projectfile is the name of the .xcodeproj, env.buildscheme is
@@ -221,8 +220,16 @@ jobs:
           
           echo "::notice::Built ${{ steps.version.outputs.releasename }} version ${{ steps.version.outputs.version }}, build number $bundleVersion"
           
+          symfilename="${{ env.bundlename }}.dSYM"
+          if [ ! -d "${{ env.builddir }}/$symfilename" ] ; then
+            echo "::warning::Symbol file not found"
+          fi
+          
           echo "version=$bundleVersion" >> $GITHUB_OUTPUT
           echo "appbundle=${{ env.builddir }}/${{ env.bundlename }}" >> $GITHUB_OUTPUT
+          echo "symbolfilename=$symfilename" >> $GITHUB_OUTPUT
+          echo "symbolfile=${{ env.builddir }}/$symfilename" >> $GITHUB_OUTPUT
+          echo "log=$buildlogfile" >> $GITHUB_OUTPUT
       
       - name: Save Build Log as Artifact
         if: ${{ steps.build.outcome == 'success' || steps.build.outcome == 'failure' }}
@@ -231,6 +238,24 @@ jobs:
           name: Build log
           path: |
             ${{ steps.build.outputs.log }}
+      
+      - name: Zip Symbol FIle
+        id: symbols
+        # needed because a .dSYM is a directory, and directories fed to actions/upload-artifact
+        # don't seem unzip with the original directory name
+        run: |
+          :
+          echo "- Create symbol file archive"
+          zipfilename="${{steps.version.outputs.releasename}} Symbols.zip"
+          ditto -c -k --keepParent "${{ steps.build.outputs.symbolfile }}" "$zipfilename"
+          
+          echo "filename=$zipfilename" >> $GITHUB_OUTPUT
+      
+      - name: Save Zipped Symbol File as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Symbol file"
+          path: ${{ steps.symbols.outputs.filename }}
       
       - name: Setup Keychain
         run: |
