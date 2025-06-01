@@ -153,16 +153,22 @@ class MenuController {
   // and fallback to default NSMenu behavior by enabling
   // UserDefaults.standard.avoidTakingFocus.
   private func withFocus(_ closure: @escaping () -> Void) {
+    #if !CLEEPP
     KeyboardShortcuts.disable(.popup)
+    #endif
 
     if UserDefaults.standard.avoidTakingFocus {
       closure()
+      #if !CLEEPP
       KeyboardShortcuts.enable(.popup)
+      #endif
     } else {
       NSApp.activate(ignoringOtherApps: true)
       Timer.scheduledTimer(withTimeInterval: 0.04, repeats: false) { _ in
         closure()
+        #if !CLEEPP
         KeyboardShortcuts.enable(.popup)
+        #endif
         if Maccy.returnFocusToPreviousApp && self.extraVisibleWindows.count == 0 {
           NSApp.hide(self)
           Maccy.returnFocusToPreviousApp = true

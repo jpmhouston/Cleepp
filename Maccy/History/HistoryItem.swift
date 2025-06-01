@@ -4,6 +4,7 @@ import Sauce
 
 @objc(HistoryItem)
 class HistoryItem: NSManagedObject {
+  #if !CLEEPP
   static var availablePins: Set<String> {
     var keys = Set([
       "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
@@ -19,6 +20,7 @@ class HistoryItem: NSManagedObject {
 
     return keys
   }
+  #endif
 
   static let sortByFirstCopiedAt = NSSortDescriptor(key: #keyPath(HistoryItem.firstCopiedAt), ascending: false)
 
@@ -49,10 +51,12 @@ class HistoryItem: NSManagedObject {
     all.filter({ $0.pin == nil })
   }
 
+  #if !CLEEPP
   static var randomAvailablePin: String {
     let assignedPins = Set(all.compactMap({ $0.pin }))
     return availablePins.subtracting(assignedPins).randomElement() ?? ""
   }
+  #endif
 
   @NSManaged public var application: String?
   @NSManaged public var contents: NSSet?

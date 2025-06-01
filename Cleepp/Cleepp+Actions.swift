@@ -508,7 +508,7 @@ extension Cleepp {
   @IBAction
   func deleteHighlightedHistoryItem(_ sender: AnyObject) {
     guard !Self.busy else {
-      return
+      return // TODO: restore logging breakpoint here once solving why it fires even when guard passes
     }
     
     guard let deletedIndex = menu.deleteHighlightedItem() else {

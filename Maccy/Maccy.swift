@@ -680,7 +680,8 @@ class Maccy: NSObject {
     #endif
   }
   // swiftlint:enable function_body_length
-
+  
+  #if !CLEEPP
   private func disableUnusedGlobalHotkeys() {
     let names: [KeyboardShortcuts.Name] = [.delete, .pin]
     KeyboardShortcuts.disable(names)
@@ -696,5 +697,6 @@ class Maccy: NSObject {
       }
     }
   }
+  #endif
 }
 // swiftlint:enable type_body_length

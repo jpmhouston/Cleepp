@@ -12,15 +12,25 @@ enum KeyChord: CaseIterable {
     (NSApp.delegate as? AppDelegate)?.pasteMenuItem.keyEquivalentModifierMask ?? [.command]
   }
   
-  #if CLEEPP
   static var copyKey: Key {
     (NSApp.delegate as? AppDelegate)?.copyMenuItem.key ?? .c
   }
   static var copyKeyModifiers: NSEvent.ModifierFlags {
     (NSApp.delegate as? AppDelegate)?.copyMenuItem.keyEquivalentModifierMask ?? [.command]
   }
+  
+  #if CLEEPP
+  // TODO: custom handling of cut and copy from the search field as well as paste
+//  static var cutKey: Key {
+//    (NSApp.delegate as? AppDelegate)?.cutMenuItem.key ?? .x
+//  }
+//  static var cutKeyModifiers: NSEvent.ModifierFlags {
+//    (NSApp.delegate as? AppDelegate)?.cutMenuItem.keyEquivalentModifierMask ?? [.command]
+//  }
+//  
   #endif
   
+  #if !CLEEPP
   static var deleteKey: Key? {
     if let shortcut = KeyboardShortcuts.Shortcut(name: .delete) {
       return Sauce.shared.key(for: shortcut.carbonKeyCode)
@@ -50,6 +60,7 @@ enum KeyChord: CaseIterable {
       return nil
     }
   }
+  #endif
 
   case clearHistory
   case clearHistoryAll
@@ -62,6 +73,9 @@ enum KeyChord: CaseIterable {
   case moveToNext
   case moveToPrevious
   case openPreferences
+  // TODO: custom handling of cut and copy from the search field as well as paste
+  //case cut
+  //case copy
   case paste
   case pinOrUnpin
   case selectCurrentItem
@@ -89,15 +103,22 @@ enum KeyChord: CaseIterable {
       self = .moveToNext
     case (.k, [.control]):
       self = .moveToPrevious
+#if !CLEEPP
     case (KeyChord.deleteKey, KeyChord.deleteModifiers):
       self = .deleteCurrentItem
-#if !CLEEPP
     case (KeyChord.pinKey, KeyChord.pinModifiers):
       self = .pinOrUnpin
     case (GlobalHotKey.key, GlobalHotKey.modifierFlags):
       self = .hide
     case (.comma, MenuFooter.preferences.keyEquivalentModifierMask):
       self = .openPreferences
+#endif
+#if CLEEPP
+      // TODO: custom handling of cut and copy from the search field as well as paste
+//    case (KeyChord.cutKey, KeyChord.cutKeyModifiers):
+//      self = .cut
+//    case (KeyChord.copyKey, KeyChord.copyKeyModifiers):
+//      self = .copy
 #endif
     case (KeyChord.pasteKey, KeyChord.pasteKeyModifiers):
       self = .paste

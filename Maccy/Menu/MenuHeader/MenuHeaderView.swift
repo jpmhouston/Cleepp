@@ -148,13 +148,7 @@ class MenuHeaderView: NSView, NSSearchFieldDelegate {
       #endif
       setQuery("")
       return true
-#if CLEEPP
-    case .deleteCurrentItem:
-      if let maccy = (NSApp.delegate as? AppDelegate)?.maccy {
-        maccy.deleteHighlightedHistoryItem(self)
-      }
-      return true
-#else
+#if !CLEEPP
     case .deleteCurrentItem:
       customMenu?.delete()
       setQuery("")
@@ -190,6 +184,9 @@ class MenuHeaderView: NSView, NSSearchFieldDelegate {
       performMenuItemAction(MenuFooter.preferences.rawValue)
       return true
 #endif
+      // TODO: add cut & copy from the search field, doesn't add to queue or history
+//    case .cut:
+//    case .copy:
     case .paste:
       #if !CLEEPP
       if HistoryItem.pinned.contains(where: { $0.pin == key.rawValue }) {

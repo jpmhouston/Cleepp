@@ -75,6 +75,8 @@
 		8F31CABE2C1CEDDD006CC06D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8F31CABB2C1CEDAB006CC06D /* Intents.intentdefinition */; };
 		8F31CAC12C1D00E9006CC06D /* StartIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F31CAC02C1CF458006CC06D /* StartIntentHandler.swift */; };
 		8F31CAC22C1D00EA006CC06D /* StartIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F31CAC02C1CF458006CC06D /* StartIntentHandler.swift */; };
+		8F4298142DE77A9600F2185A /* MenuItemKeyDetectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4298132DE77A9600F2185A /* MenuItemKeyDetectorView.swift */; };
+		8F4298152DE77A9600F2185A /* MenuItemKeyDetectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4298132DE77A9600F2185A /* MenuItemKeyDetectorView.swift */; };
 		8F54639C2BE7B6DC008D67EF /* MenuBasicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5463982BE7B6DC008D67EF /* MenuBasicUITests.swift */; };
 		8F54639D2BE7B6DC008D67EF /* CleeppUITestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5463992BE7B6DC008D67EF /* CleeppUITestBase.swift */; };
 		8F54639E2BE7B6DC008D67EF /* QueueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54639A2BE7B6DC008D67EF /* QueueUITests.swift */; };
@@ -418,6 +420,7 @@
 		8F0D3CE02BABD57300DDB603 /* Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
 		8F31CABB2C1CEDAB006CC06D /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		8F31CAC02C1CF458006CC06D /* StartIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartIntentHandler.swift; sourceTree = "<group>"; };
+		8F4298132DE77A9600F2185A /* MenuItemKeyDetectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemKeyDetectorView.swift; sourceTree = "<group>"; };
 		8F4D26952BCFE2A1009A187B /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		8F5463982BE7B6DC008D67EF /* MenuBasicUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBasicUITests.swift; sourceTree = "<group>"; };
 		8F5463992BE7B6DC008D67EF /* CleeppUITestBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CleeppUITestBase.swift; sourceTree = "<group>"; };
@@ -813,6 +816,7 @@
 			children = (
 				8F0D3C892BABB17200DDB603 /* Menu.swift */,
 				8F0D3C8B2BABB17200DDB603 /* Menu.xib */,
+				8F4298132DE77A9600F2185A /* MenuItemKeyDetectorView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -1548,6 +1552,7 @@
 				8F8C48452BACD41200C3A219 /* AdvancedSettingsViewController.swift in Sources */,
 				8F0D3C2E2BAB8F5A00DDB603 /* CoreDataManager.swift in Sources */,
 				8F0D3C302BAB8F5A00DDB603 /* UserDefaults+Configuration.swift in Sources */,
+				8F4298142DE77A9600F2185A /* MenuItemKeyDetectorView.swift in Sources */,
 				8F2F3B312C192FF7001CE740 /* NSWorkspace+ApplicationName.swift in Sources */,
 				8F0D3C312BAB8F5A00DDB603 /* RunLoopLocalEventMonitor.swift in Sources */,
 				8F0D3C322BAB8F5A00DDB603 /* Clipboard.swift in Sources */,
@@ -1626,6 +1631,7 @@
 				8F8C486C2BAD51B000C3A219 /* AdvancedSettingsViewController.swift in Sources */,
 				8F8C486D2BAD51B000C3A219 /* CoreDataManager.swift in Sources */,
 				8F8C486E2BAD51B000C3A219 /* UserDefaults+Configuration.swift in Sources */,
+				8F4298152DE77A9600F2185A /* MenuItemKeyDetectorView.swift in Sources */,
 				8F8C486F2BAD51B000C3A219 /* RunLoopLocalEventMonitor.swift in Sources */,
 				8F2F3B302C192FF6001CE740 /* NSWorkspace+ApplicationName.swift in Sources */,
 				8F8C48702BAD51B000C3A219 /* Clipboard.swift in Sources */,
