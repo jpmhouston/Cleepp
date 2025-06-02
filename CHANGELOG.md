@@ -1,5 +1,14 @@
 Batch Clipboard Changelog
 
+## version 1.0.2b1 (2025-06-02)
+
+- Fix deleting history and batch mode menu items, keep menu open afterwards.
+- Widened key shortcut entry fields in the General tab of the Settings window.
+- Corrected label in the Intro window's first page explaining how to re-open that window.
+- Made outline in the app store verison's purchase confirmation sheet visible in both light & dark.
+- Avoid emitting some spurious warnings into the system log.
+- Improved build actions to log the application's build number and retain symbol files.
+
 ## version 1.0.1 (2025-05-01)
 
 - Made menus use titlecase more consistently (lowercase "to", "with"), in sync with most recent documentation.
