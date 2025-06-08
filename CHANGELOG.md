@@ -1,5 +1,10 @@
 Batch Clipboard Changelog
 
+## version 1.0.2 (2025-06-08 🌎)
+
+- Ship the 1.0.2b1 changes in time for WWDC 2025, defer fix for sporadic crash until more reports available.
+- Changed the github workflow for the app store verison to also automatically deploy when triggered by pushed tag matching the project's version (matching non-app store workflow behavior).
+
 ## version 1.0.2b1 (2025-06-02)
 
 - Fix deleting history and batch mode menu items, keep menu open afterwards.
