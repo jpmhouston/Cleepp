@@ -2,6 +2,7 @@
 name: Build Mac App Store Release
 
 on:
+  create:
   workflow_dispatch:
     inputs:
       releaseVersion:
@@ -131,20 +132,35 @@ jobs:
           releasename="${{ env.productname }} $version"
           releasenameNoSpaces="$(echo "${{ env.productname }}" |  sed "s/ /./").$version"
           
-          echo "- Parse trigger" # NOTE: only support triggering manually for now
+          echo "- Parse trigger"
           if [[ "${{ github.event_name }}" == workflow_dispatch ]] ; then
             if [[ "${{ github.ref }}" != "refs/heads/${{ env.branch }}" ]] ; then
               echo "::error::Manually triggered workflow supports ${{ env.branch }} only, gihub.ref == ${{ github.ref }})"
               exit 1
             fi
-            if [[ ${{ steps.inputs.outputs.upload }} == 'true' ]] ; then
+            if git show-ref --tags --verify refs/tags/v$version --quiet ; then
+              tag="v$version"
+              if [[ ${{ steps.inputs.outputs.upload }} != 'true' ]] ; then
+                echo "- Will build and save as artifacts verison \"$releasename\" and associated release notes"
+              else
+                echo "- Will build and deplay verison \"$releasename\" and save as as artifact with associated release notes"
+              fi
+            elif [[ ${{ steps.inputs.outputs.upload }} != 'true' ]] ; then
               echo "- Will build and save as artifacts verison \"$releasename\" and associated release notes"
             else
-              echo "- Will build and deplay verison \"$releasename\" and save as as artifact with associated release notes"
+              echo "- Will build and save release \"$releasename\" as artifact because no tag \"v$version\" was found"
             fi
+          elif [[ "${{ github.ref }}" == refs/tags/* ]] ; then
+            # TODO: how do we verify the branch of this tag and ensure its ${{ env.branch }} ?
+            ref="${{ github.ref }}"
+            tag="${ref:10}" # magic number 10 being the length of "refs/tags/", stripping that to leave just the tag name
+            echo "- Will build and draft release \"$releasename\" because triggered by pushed tag \"$tag\""
           else
             echo "::error::Not triggered manually or by a tag (github.event_name == ${{ github.event_name }}, gihub.ref == ${{ github.ref }})"
             exit 1
+          fi
+          if [[ -z $tag && ${{ steps.inputs.outputs.upload }} == 'true' ]] ; then
+            echo "::notice::Uploading to App Store Connect skipped because no tag \"v$version\" was found"
           fi
           
           # parse version to set these
@@ -556,7 +572,7 @@ jobs:
           echo "issuerid=${{ secrets.APPSTORECONNECT_APIISSUERID }}" >> $GITHUB_OUTPUT
       
       - name: Deploy
-        if: ${{ success() && steps.inputs.outputs.upload == 'true'}}
+        if: ${{ success() && steps.inputs.outputs.upload == 'true' && steps.version.outputs.tag }}
         run: |
           :
           if [[ -z "${{ secrets.APPSTORECONNECT_APPID }}" ]] ; then
@@ -579,7 +595,7 @@ jobs:
       - name: Fin
         run: |
           :
-          if [[ "${{ steps.inputs.outputs.upload }}" == 'true' ]] ; then
+          if [[ "${{ steps.inputs.outputs.upload }}" == 'true' && steps.version.outputs.tag ]] ; then
             echo "::notice::Deployed \"${{ env.bundlename }}\" to app store, saved it and \"${{ steps.notes.outputs.filename }}\" as artifacts"
           else
             echo "::notice::Saved \"${{ env.bundlename }}\" and \"${{ steps.notes.outputs.filename }}\" as artifacts"
