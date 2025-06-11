@@ -27,7 +27,7 @@ Batch Clipboard is built to run optimally on both Intel and Apple Silicon, and i
 to work on systems running OS versions as old as 2019's macOS Catalina 10.15, however it
 will run best on the latest OS (as of this writing, macOS 15 Sequoia).
 _Testing has not been comprehensive on those older systems, please report any issues to
-[batchclip.support@bananameter.lol](mailto:batchclip.support@bananameter.lol)._
+[batchclipboard.support@bananameter.lol](mailto:batchclipboard.support@bananameter.lol)._
 
 ### Install
 
