@@ -54,7 +54,7 @@ class MenuItemKeyDetectorView : NSView {
   }
   
   private func processInterceptedEvent(_ event: NSEvent) -> Bool {
-    guard let menuItem = menuItem, menuItem.isEnabled else {
+    guard let menuItem = menuItem, menuItem.isEnabled, let target = menuItem.target, let action = menuItem.action else {
       return false
     }
     
@@ -72,7 +72,9 @@ class MenuItemKeyDetectorView : NSView {
       return false
     }
     
-    _ = menuItem.target?.perform(menuItem.action, with: self)
+    DispatchQueue.main.async {
+      _ = target.perform(action, with: self)
+    }
     return true
   }
   
