@@ -20,14 +20,13 @@ enum KeyChord: CaseIterable {
   }
   
   #if CLEEPP
-  // TODO: custom handling of cut and copy from the search field as well as paste
-//  static var cutKey: Key {
-//    (NSApp.delegate as? AppDelegate)?.cutMenuItem.key ?? .x
-//  }
-//  static var cutKeyModifiers: NSEvent.ModifierFlags {
-//    (NSApp.delegate as? AppDelegate)?.cutMenuItem.keyEquivalentModifierMask ?? [.command]
-//  }
-//  
+  static var cutKey: Key {
+    (NSApp.delegate as? AppDelegate)?.cutMenuItem.key ?? .x
+  }
+  static var cutKeyModifiers: NSEvent.ModifierFlags {
+    (NSApp.delegate as? AppDelegate)?.cutMenuItem.keyEquivalentModifierMask ?? [.command]
+  }
+  
   #endif
   
   #if !CLEEPP
@@ -73,9 +72,8 @@ enum KeyChord: CaseIterable {
   case moveToNext
   case moveToPrevious
   case openPreferences
-  // TODO: custom handling of cut and copy from the search field as well as paste
-  //case cut
-  //case copy
+  case cut
+  case copy
   case paste
   case pinOrUnpin
   case selectCurrentItem
@@ -114,11 +112,10 @@ enum KeyChord: CaseIterable {
       self = .openPreferences
 #endif
 #if CLEEPP
-      // TODO: custom handling of cut and copy from the search field as well as paste
-//    case (KeyChord.cutKey, KeyChord.cutKeyModifiers):
-//      self = .cut
-//    case (KeyChord.copyKey, KeyChord.copyKeyModifiers):
-//      self = .copy
+    case (KeyChord.cutKey, KeyChord.cutKeyModifiers):
+      self = .cut
+    case (KeyChord.copyKey, KeyChord.copyKeyModifiers):
+      self = .copy
 #endif
     case (KeyChord.pasteKey, KeyChord.pasteKeyModifiers):
       self = .paste

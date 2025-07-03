@@ -184,16 +184,33 @@ class MenuHeaderView: NSView, NSSearchFieldDelegate {
       performMenuItemAction(MenuFooter.preferences.rawValue)
       return true
 #endif
-      // TODO: add cut & copy from the search field, doesn't add to queue or history
-//    case .cut:
-//    case .copy:
+#if CLEEPP
+    case .cut:
+      guard let e = queryField.currentEditor(), e.selectedRange.length > 0, let r = Range(e.selectedRange, in: e.string) else {
+        return true
+      }
+      let s = String(e.string[r])
+      Clipboard.shared.copy(s, excludeFromHistory: true)
+      // delete selection
+      let selectionNSRange = e.selectedRange
+      e.selectedRange = NSRange(location: selectionNSRange.location, length: 0)
+      e.replaceCharacters(in: selectionNSRange, with: "")
+      return true
+    case .copy:
+      guard let e = queryField.currentEditor(), e.selectedRange.length > 0, let r = Range(e.selectedRange, in: e.string) else {
+        return true
+      }
+      let s = String(e.string[r])
+      Clipboard.shared.copy(s, excludeFromHistory: true)
+      return true
+#endif
     case .paste:
       #if !CLEEPP
       if HistoryItem.pinned.contains(where: { $0.pin == key.rawValue }) {
         return false
       }
-      #endif
       queryField.becomeFirstResponder()
+      #endif
       queryField.currentEditor()?.paste(nil)
       return true
     case .selectCurrentItem:

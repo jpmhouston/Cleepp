@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24093.8" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24093.8"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -14,6 +15,7 @@
         <customObject id="qYj-xg-cp5" userLabel="Delegate" customClass="AppDelegate" customModule="Batch_Clipboard" customModuleProvider="target">
             <connections>
                 <outlet property="copyMenuItem" destination="kxU-pP-MCf" id="hx1-bT-sDV"/>
+                <outlet property="cutMenuItem" destination="Kin-p4-VD1" id="LYH-Sy-Quc"/>
                 <outlet property="pasteMenuItem" destination="vN8-yt-ylS" id="2vu-Dm-hXA"/>
             </connections>
         </customObject>
@@ -52,6 +54,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Edit" id="uqj-Ai-QW7">
                         <items>
+                            <menuItem title="Cut" hidden="YES" keyEquivalent="x" id="Kin-p4-VD1"/>
                             <menuItem title="Copy" hidden="YES" keyEquivalent="c" id="kxU-pP-MCf"/>
                             <menuItem title="Paste" hidden="YES" keyEquivalent="v" id="vN8-yt-ylS">
                                 <connections>

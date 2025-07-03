@@ -16,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet weak var pasteMenuItem: NSMenuItem!
 
 #if CLEEPP
+  @IBOutlet weak var cutMenuItem: NSMenuItem!
+  
   private var startHotKey: GlobalStartHotKey!
   private var copyHotKey: GlobalCopyHotKey!
   private var pasteHotKey: GlobalPasteHotKey!
