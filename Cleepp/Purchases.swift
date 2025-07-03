@@ -10,6 +10,7 @@ import AppKit
 import StoreKit
 import Flare
 import TPInAppReceipt
+import os.log
 
 class Purchases: NSObject {
   // observer scheme described in https://www.swiftbysundell.com/articles/observers-in-swift-part-2/
@@ -278,7 +279,6 @@ class Purchases: NSObject {
       
       let restoredItems = receipt.purchases.map { itemValueForProductIdentifier($0.productIdentifier) }
       return .success(Set(restoredItems))
-      // receipt.hasPurchases ? .success([.bonus]) : .success([])
       
     } catch IARError.initializationFailed(let reason) {
       // catch let error as IARError.initializationFailed(reason) .. can swift let us do this?
@@ -286,17 +286,17 @@ class Purchases: NSObject {
         return .success([]) // short-circuit to return success after all
         
       } else {
-        print("Failure validating receipt: validator itself")
+        os_log(.default, "failure validating receipt: validator itself")
         errorValue = .malformedReceipt
       }
       
     } catch IARError.validationFailed {
-      // catch let error as IARError.validationFailed(reason)
-      print("Failure validating receipt: did not validate")
+      // wanted something like: `catch let error as IARError.validationFailed(reason)`
+      os_log(.default, "failure validating receipt: did not validate")
       errorValue = .invalidReceipt
       
     } catch {
-      print("Error during local receipt validation: \(error.localizedDescription)") // TODO: either ditch logging these or improve the manner & messages
+      os_log(.default, "error during local receipt validation: %@", error.localizedDescription)
       errorValue = .unknown
     }
     
@@ -320,10 +320,10 @@ class Purchases: NSObject {
         completion(.success([]))
         
       case .failure(.with(let underlyingError)):
-        print("Error during receipt refresh: \(underlyingError.localizedDescription)") // TODO: either ditch logging these or improve the manner & messages
+        os_log(.default, "error during receipt refresh: %@", underlyingError.localizedDescription)
         completion(.failure(.unreachable))
       case .failure(let error):
-        print("Error during receipt refresh: \(error.localizedDescription)") // TODO: either ditch logging these or improve the manner & messages
+        os_log(.default, "error during receipt refresh: %@", error.localizedDescription)
         completion(.failure(.unknown))
       }
     }
@@ -347,10 +347,10 @@ class Purchases: NSObject {
         completion(.success([]))
         
       case .failure(.with(let underlyingError)):
-        print("Error during restore: \(underlyingError.localizedDescription)") // TODO: either ditch logging these or improve the manner & messages
+        os_log(.default, "error during restore: %@", underlyingError.localizedDescription)
         completion(.failure(.unreachable))
       case .failure(let error):
-        print("Error during restore: \(error.localizedDescription)") // TODO: either ditch logging these or improve the manner & messages
+        os_log(.default, "error during restore: %@", error.localizedDescription)
         completion(.failure(.unknown))
       }
     }
@@ -361,13 +361,13 @@ class Purchases: NSObject {
       switch fetchResult {
       case .success(let storeProducts):
         if let productMissingPrice = storeProducts.first(where: { $0.localizedPriceString == nil }) {
-          print("Product missing its price during product fetch: \(productMissingPrice.productIdentifier)") // TODO: either ditch logging these or improve the manner & messages
+          os_log(.default, "product missing its price during product fetch: %@", productMissingPrice.productIdentifier)
           completion(.failure(.malformedProducts))
         }
         let productDetails: [FlareProductDetail] = storeProducts.map { FlareProductDetail($0) }
         completion(.success(productDetails))
       case .failure(let error):
-        print("Error during product fetch: \(error.localizedDescription)") // TODO: either ditch logging these or improve the manner & messages
+        os_log(.default, "error during product fetch: %@", error.localizedDescription)
         completion(.failure(.unknown))
       }
     }
@@ -379,7 +379,7 @@ class Purchases: NSObject {
       case .success(_):
         completion(.success(([productDetail.item])))
       case .failure(let error):
-        print("Error during purchase: \(error.localizedDescription)") // TODO: either ditch logging these or improve the manner & messages
+        os_log(.default, "error during purchase: %@", error.localizedDescription)
         switch error {
         case .paymentCancelled:
           completion(.failure(.cancelled))
@@ -392,62 +392,21 @@ class Purchases: NSObject {
   
   private func completeTransactionsCallback(withResult transactionResult: Result<StoreTransaction, IAPError>) {
     switch transactionResult {
-    case .success(let transaction):
-      print("A transaction was received: \(transaction)")
+    case .success(_): // .success(let transaction):
+      //print("A transaction was received: \(transaction)")
+      break
       // I don't think purchase or restore relies on this callback, although I think we could
       // in theory we could take out the existing data flow through completions and use this.
       // Keeping below the original version of this callback from attempt to use SwiftyStoreKit
       // for an idea of what could be done here.
       
     case .failure(.paymentCancelled):
-      print("A transaction cancellation was received")
+      //print("A transaction cancellation was received")
       callObservers(withUpdate: .failure(.cancelled))
     case .failure(let error):
-      print("A transaction failure was received: \(error.localizedDescription)")
+      os_log(.default, "transaction failure received: %@", error.localizedDescription)
       callObservers(withUpdate: .failure(.unknown))
     }
   }
-  
-  // Below is what I thought was needed when first using SwiftyStoreKit ...
-  // I still don't know for sure if anything like these .purchased and .restored
-  // handlers are needed:
-  
-//  private func completeTransactionsCallback(withPurchases purchases: [Purchase]) {
-//    for purchase in purchases {
-//      switch purchase.transaction.transactionState {
-//      case .purchased:
-//        // when should we validate purchase receipts??
-//        
-//        // instead of comparing against a well-known product id, any purchase gets the user the bonus
-//        boughtItems.insert(.bonus)
-//        callObservers(withUpdate: .success(.purchases([.bonus])))
-//        lastError = nil
-//        
-//        if purchase.needsFinishTransaction {
-//          SwiftyStoreKit.finishTransaction(purchase.transaction)
-//        }
-//        
-//      case .restored:
-//        boughtItems.insert(.bonus)
-//        callObservers(withUpdate: .success(.restorations([.bonus])))
-//        lastError = nil
-//        
-//        if purchase.needsFinishTransaction {
-//          SwiftyStoreKit.finishTransaction(purchase.transaction)
-//        }
-//        
-//      case .failed:
-//        print("Purchase failed: \(purchase.productId), \(purchase.transaction.transactionIdentifier ?? "unknown transaction")")
-//        callObservers(withUpdate: .failure(.unknown))
-//        lastError = .unknown
-//        
-//      case .purchasing, .deferred:
-//        // TODO: look into these cases and see if we need to do anything
-//        break
-//      @unknown default:
-//        break
-//      }
-//    }
-//  }
   
 }
