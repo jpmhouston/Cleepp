@@ -1,5 +1,13 @@
 Batch Clipboard Changelog
 
+## version 1.0.3b1 (2025-07-03)
+
+- Attempt to address crash: avoid impossible Swift range and log details to console.
+- Attempt to address crash: ensure history menu item deletion calls menu code on main thread.
+- Address some outstanding TODOs: upgrade print statements to os_log calls.
+- Address some outstanding TODOs: handle cut, copy, paste within the filter text field (copies not added to the clipboard history).
+- Address some outstanding TODOs: make more strings within source code localizable.
+
 ## version 1.0.2 (2025-06-08 🌎)
 
 - Ship the 1.0.2b1 changes in time for WWDC 2025, defer fix for sporadic crash until more reports available.
