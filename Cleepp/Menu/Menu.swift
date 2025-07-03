@@ -739,7 +739,7 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     let badgedMenuItemsSupported = if #available(macOS 14, *) { true } else { false }
     let promoteExtras = Cleepp.allowPurchases && UserDefaults.standard.promoteExtras && badgedMenuItemsSupported
     if promoteExtras && promoteExtrasBadge == nil, #available(macOS 14, *) {
-      promoteExtrasBadge = NSMenuItemBadge(string: "LOCKED") // NSLocalizedString("promoteextras_menu_badge", comment: "")
+      promoteExtrasBadge = NSMenuItemBadge(string: NSLocalizedString("promoteextras_menu_badge", comment: ""))
     }
     
     let gotHistoryItems = !queue.isEmpty || (showsExpandedMenu && indexedItems.count > 0)

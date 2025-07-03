@@ -41,3 +41,8 @@
 "number_alert_comment" = "You have {number} clipboard items ready to replay, paste how many of them at once now?";
 "number_alert_cancel" = "Cancel";
 "number_alert_confirm" = "Paste";
+"promoteextras_menu_badge" = "PERK";
+"promoteextras_alert_message" = "Support the app's continuing development to unlock this feature?";
+"promoteextras_alert_comment" = "The button below takes you to the Support Us page of the Settings window where you can make an in-app purchase to support the makers of this app, and for doing so this and other extra features will be unlocked.";
+"promoteextras_alert_show_settings" = "Open Settings";
+"promoteextras_alert_cancel" = "Cancel";

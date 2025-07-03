@@ -614,12 +614,10 @@ extension Cleepp {
   private func showBonusFeaturePromotionAlert() {
     let alert = NSAlert()
     alert.alertStyle = .informational
-    alert.messageText = "Support the app's continuing development to unlock this feature?" // NSLocalizedString("promoteextras_alert_message", comment: "")
-    alert.informativeText = "The button below takes you to the Support Us page of the Settings window where you can make an in-app purchase to support the makers of this app, and for doing so this and other extra features will be unlocked."
-      // NSLocalizedString("promoteextras_alert_comment", comment: "")
-    alert.addButton(withTitle: "Open Settings")   // NSLocalizedString("promoteextras_alert_show_settings", comment: ""))
-    alert.addButton(withTitle: "Cancel")          // NSLocalizedString("promoteextras_alert_cancel", comment: ""))
-    //alert.icon = NSImage(named: "NSSecurity") // is app icon the default if we don't set this?
+    alert.messageText = NSLocalizedString("promoteextras_alert_message", comment: "")
+    alert.informativeText = NSLocalizedString("promoteextras_alert_comment", comment: "")
+    alert.addButton(withTitle: NSLocalizedString("promoteextras_alert_show_settings", comment: ""))
+    alert.addButton(withTitle: NSLocalizedString("promoteextras_alert_cancel", comment: ""))
     
     switch alert.runModal() {
     case NSApplication.ModalResponse.alertFirstButtonReturn:
