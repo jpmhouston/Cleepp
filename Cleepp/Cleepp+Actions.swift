@@ -523,7 +523,7 @@ extension Cleepp {
       do {
         try queue.remove(atIndex: index)
       } catch {
-        os_log(.default, "fixing queue after deleting item failed, %@", error.localizedDescription)
+        os_log(.default, "failed to fix queue after deleting item, %@", error.localizedDescription)
         queue.off()
       }
       

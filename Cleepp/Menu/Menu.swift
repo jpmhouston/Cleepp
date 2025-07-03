@@ -11,6 +11,7 @@
 
 // swiftlint:disable file_length
 import AppKit
+import os.log
 
 typealias Menu = CleeppMenu
 
@@ -465,7 +466,6 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     let wasHighlighted = indexedItem.item == lastHighlightedItem?.item
     
     // remove menu items, history item, this class's indexing item
-    indexedItem.menuItems.forEach({ $0.isHidden = true })
     indexedItem.menuItems.forEach(safeRemoveItem)
     history.remove(indexedItem.item)
     indexedItems.remove(at: position)
@@ -798,7 +798,7 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
     
     // First queue items to always show when not filtering by a search term
     if !queue.isEmpty && !isFiltered {
-      let endQueuedItemIndex = remainingHistoryMenuItemIndex + historyMenuItemsGroupCount * queue.size
+      let endQueuedItemIndex = firstHistoryMenuItemIndex + historyMenuItemsGroupCount * queue.size
       
       for index in firstHistoryMenuItemIndex ..< endQueuedItemIndex {
         makeVisible(true, historyMenuItemAt: index)
@@ -807,8 +807,16 @@ class CleeppMenu: NSMenu, NSMenuDelegate {
       remainingHistoryMenuItemIndex = endQueuedItemIndex
     }
     
+    if remainingHistoryMenuItemIndex > endHistoryMenuItemIndex {
+      os_log(.default, "range fail %d ..< %d, has topanchor: %d, first %d, end %d, remaining %d which might eq first + queue size %d * %d",
+             remainingHistoryMenuItemIndex, endHistoryMenuItemIndex,
+             topAnchorItem != nil ? 1 : 0, firstHistoryMenuItemIndex, endHistoryMenuItemIndex,
+             remainingHistoryMenuItemIndex, queue.size, historyMenuItemsGroupCount)
+      remainingHistoryMenuItemIndex = endHistoryMenuItemIndex
+    }
+    
     // Remaining history items hidden unless showing the expanded menu
-    for index in remainingHistoryMenuItemIndex  ..< endHistoryMenuItemIndex {
+    for index in remainingHistoryMenuItemIndex ..< endHistoryMenuItemIndex {
       makeVisible(showsExpandedMenu, historyMenuItemAt: index)
     }
   }

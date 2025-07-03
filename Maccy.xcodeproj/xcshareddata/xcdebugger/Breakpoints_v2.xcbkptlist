@@ -69,8 +69,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "prepareForPopup(location:)"
             landmarkType = "7">
             <Actions>
@@ -94,8 +94,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "menuWillOpen(_:)"
             landmarkType = "7">
             <Actions>
@@ -119,8 +119,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "menuDidClose(_:)"
             landmarkType = "7">
             <Actions>
@@ -144,8 +144,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "addQueueItemsSeparator()"
             landmarkType = "7">
             <Actions>
@@ -169,8 +169,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "addQueueItemsSeparator()"
             landmarkType = "7">
             <Actions>
@@ -194,8 +194,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "addQueueItemsSeparator()"
             landmarkType = "7">
             <Actions>
@@ -219,8 +219,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "removeQueueItemsSeparator()"
             landmarkType = "7">
             <Actions>
@@ -244,8 +244,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "removeQueueItemsSeparator()"
             landmarkType = "7">
             <Actions>
@@ -269,8 +269,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "add(_:)"
             landmarkType = "7">
             <Actions>
@@ -294,8 +294,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
             landmarkName = "clearAll()"
             landmarkType = "7">
             <Actions>
@@ -319,8 +319,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
             landmarkName = "updateHeadOfQueue(index:)"
             landmarkType = "7">
             <Actions>
@@ -344,8 +344,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "updateHeadOfQueue(index:)"
             landmarkType = "7">
             <Actions>
@@ -369,8 +369,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
             landmarkName = "updateFilter(filter:)"
             landmarkType = "7">
             <Actions>
@@ -394,8 +394,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "select(position:)"
             landmarkType = "7">
             <Actions>
@@ -419,8 +419,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "historyItem(at:)"
             landmarkType = "7">
             <Actions>
@@ -444,8 +444,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "441"
-            endingLineNumber = "441"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
             landmarkName = "highlightedMenuItem()"
             landmarkType = "7">
             <Actions>
@@ -469,8 +469,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
             landmarkName = "delete(position:)"
             landmarkType = "7">
             <Actions>
@@ -619,8 +619,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "826"
-            endingLineNumber = "826"
+            startingLineNumber = "834"
+            endingLineNumber = "834"
             landmarkName = "safeInsertItem(_:at:)"
             landmarkType = "7">
             <Actions>
@@ -644,8 +644,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "846"
-            endingLineNumber = "846"
+            startingLineNumber = "854"
+            endingLineNumber = "854"
             landmarkName = "safeRemoveItem(at:)"
             landmarkType = "7">
             <Actions>
@@ -1419,8 +1419,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "menu(_:willHighlight:)"
             landmarkType = "7">
             <Actions>
@@ -1444,8 +1444,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "menu(_:willHighlight:)"
             landmarkType = "7">
             <Actions>
@@ -1469,8 +1469,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "menu(_:willHighlight:)"
             landmarkType = "7">
             <Actions>
@@ -1494,8 +1494,8 @@
             filePath = "Cleepp/Menu/Menu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "menu(_:willHighlight:)"
             landmarkType = "7">
             <Actions>
