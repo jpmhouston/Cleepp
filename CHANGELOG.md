@@ -1,5 +1,9 @@
 Batch Clipboard Changelog
 
+## version 1.0.3 (2025-07-11 🥤)
+
+- Corrected some link desintations in the About and Intro windows.
+
 ## version 1.0.3b1 (2025-07-03)
 
 - Attempt to address crash: avoid impossible Swift range and log details to console.
