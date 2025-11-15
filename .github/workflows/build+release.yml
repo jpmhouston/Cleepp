@@ -39,7 +39,7 @@ env:
 jobs:
   build:
     name: Build and Release Cleepp Non-AppStore Variant
-    runs-on: macos-15
+    runs-on: macos-latest
     
     steps:
       - name: Checkout
